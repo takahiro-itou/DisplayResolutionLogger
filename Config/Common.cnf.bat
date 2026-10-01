@@ -1,3 +1,3 @@
 
 set  solution=DisplayResolutionLogger
-set  config="Debug"
+set  config="Release"
