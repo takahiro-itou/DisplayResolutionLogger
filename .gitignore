@@ -1,8 +1,10 @@
 
-/.hg
+/.hg/
 
-Debug/
-Release/
+/Bin/
+/Libs/
+/Objs/
+
 ipch/
 bin/
 obj/
