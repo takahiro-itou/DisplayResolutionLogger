@@ -3,11 +3,15 @@
 
   <PropertyGroup>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <OutputType>WinExe</OutputType>
     <Platforms>x64;x86</Platforms>
     <RootNamespace>ViewCs</RootNamespace>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFrameworks>
+      net45
+      net48
+    </TargetFrameworks>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 

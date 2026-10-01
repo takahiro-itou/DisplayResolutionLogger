@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <OutputType>WinExe</OutputType>
     <Platforms>x64;x86</Platforms>
