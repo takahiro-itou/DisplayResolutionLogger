@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <OutputType>WinExe</OutputType>
+    <Platforms>x64;x86</Platforms>
+    <RootNamespace>ViewVb</RootNamespace>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <Import Project="..\Props\OutputApps.props" />
+
+  <ItemGroup>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Commands\SimpleCommand.vb" />
+    <Compile Include="Models\SampleModel.vb" />
+    <Compile Include="ViewModels\SampleViewModel.vb" />
+    <Compile Include="Views\MainWindow.xaml.vb" />
+  </ItemGroup>
+
+</Project>
