@@ -3,11 +3,14 @@
 
   <PropertyGroup>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <OutputType>WinExe</OutputType>
     <Platforms>x64;x86</Platforms>
-    <RootNamespace>ViewVb</RootNamespace>
+    <RootNamespace>ViewCs</RootNamespace>
     <TargetFrameworks>
-      net48;
+      net45
+      net48
     </TargetFrameworks>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
@@ -18,9 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Models\SampleModel.vb" />
-    <Compile Include="ViewModels\SampleViewModel.vb" />
-    <Compile Include="Views\MainWindow.xaml.vb" />
+    <Compile Include="Commands\SimpleCommand.cs" />
+    <Compile Include="Models\SampleModel.cs" />
+    <Compile Include="ViewModels\SampleViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs" />
   </ItemGroup>
 
 </Project>

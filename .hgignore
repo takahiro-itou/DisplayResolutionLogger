@@ -1,7 +1,5 @@
 
 syntax: glob
-Debug/
-Release/
 ipch/
 bin/
 obj/
@@ -11,8 +9,12 @@ obj/
 
 syntax: regexp
 ^\.git/
-^\.vs/
 ^Core/Lib/Tests/.git
+^\.vs/
+
+^Bin/
+^Libs/
+^Objs/
 
 subinclude:Core/.hgignore
 
