@@ -13,6 +13,9 @@
       net48;
     </TargetFrameworks>
     <UseWPF>true</UseWPF>
+
+    <!-- NotifyIcon の利用に必要 -->
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <Import Project="..\Props\OutputApps.props" />
