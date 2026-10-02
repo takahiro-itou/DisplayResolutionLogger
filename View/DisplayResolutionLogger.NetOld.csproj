@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <OutputType>WinExe</OutputType>
     <Platforms>x64;x86</Platforms>
-    <RootNamespace>ViewCs</RootNamespace>
+    <RootNamespace>MonitorLogger</RootNamespace>
     <TargetFrameworks>
       net45;
       net48;
