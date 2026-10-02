@@ -17,6 +17,8 @@
 
   <Import Project="..\Props\OutputApps.props" />
 
+  <Import Project="..\Props\CustomIcons.props" />
+
   <ItemGroup>
   </ItemGroup>
 
