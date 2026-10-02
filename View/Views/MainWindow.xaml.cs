@@ -1,7 +1,7 @@
 ﻿
-using System.Windows;
+using   System.Windows;
 
-using ViewCs;
+using   MonitorLogger;
 
 
 namespace  MonitorLogger.Views  {

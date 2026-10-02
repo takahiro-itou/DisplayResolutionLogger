@@ -4,8 +4,8 @@ using   System.Runtime.CompilerServices;
 using   System.Threading.Tasks;
 using   System.Windows.Input;
 
-using   ViewCs.Commands;
-using   ViewCs.Models;
+using   MonitorLogger.Commands;
+using   MonitorLogger.Models;
 
 
 namespace  MonitorLogger.ViewModels  {
