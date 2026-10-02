@@ -16,6 +16,28 @@
       <!-- .exe用は無し（Windows標準）にし、埋め込みリソースだけ指定 -->
       <SelectedEmbedIcon>$(DefaultIcon)</SelectedEmbedIcon>
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(SelectedExeIcon)' != ''">
+      <ApplicationIcon>$(SelectedExeIcon)</ApplicationIcon>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(SelectedEmbedIcon)' != ''">
+      <Resource
+          Include="$(SelectedEmbedIcon)"
+          Link="Resources\AppEmbeddedIcon.ico"
+      />
+    </ItemGroup>
+
+    <Message
+        Importance="high"
+        Text="[.exe Icon] -> $(SelectedExeIcon)"
+        Condition="'$(SelectedExeIcon)' != ''"
+    />
+    <Message
+        Importance="high"
+        Text="[Embedded Window Icon] -> $(SelectedEmbedIcon)"
+        Condition="'$(SelectedEmbedIcon)' != ''"
+    />
   </Target>
 
 </Project>
