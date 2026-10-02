@@ -9,22 +9,18 @@
 
     <PropertyGroup Condition="Exists('$(AppIcon1)')">
       <SelectedExeIcon>$(AppIcon1)</SelectedExeIcon>
-      <SelectedEmbedIcon>$(AppIcon1)</SelectedEmbedIcon>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$([System.String]::IsNullOrEmpty($(SelectedExeIcon)))' And Exists('$(DefaultIcon)')">
-      <!-- .exe用は無し（Windows標準）にし、埋め込みリソースだけ指定 -->
-      <SelectedEmbedIcon>$(DefaultIcon)</SelectedEmbedIcon>
-    </PropertyGroup>
-
+    <!--  EXE ファイル用アイコンが確定した場合は適用  -->
     <PropertyGroup Condition="'$(SelectedExeIcon)' != ''">
       <ApplicationIcon>$(SelectedExeIcon)</ApplicationIcon>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(SelectedEmbedIcon)' != ''">
+    <!--  メインウィンドウ用のデフォルトアイコン  -->
+    <ItemGroup Condition="Exists('$(DefaultIcon)')">
       <Resource
-          Include="$(SelectedEmbedIcon)"
-          Link="Resources\AppEmbeddedIcon.ico"
+          Include="$(DefaultIcon)"
+          Link="Resources\MainWindowEmbedded.ico"
       />
     </ItemGroup>
 
@@ -32,11 +28,6 @@
         Importance="high"
         Text="[.exe Icon] -> $(SelectedExeIcon)"
         Condition="'$(SelectedExeIcon)' != ''"
-    />
-    <Message
-        Importance="high"
-        Text="[Embedded Window Icon] -> $(SelectedEmbedIcon)"
-        Condition="'$(SelectedEmbedIcon)' != ''"
     />
   </Target>
 
