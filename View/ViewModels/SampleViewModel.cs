@@ -1,14 +1,14 @@
 ﻿
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using   System.ComponentModel;
+using   System.Runtime.CompilerServices;
+using   System.Threading.Tasks;
+using   System.Windows.Input;
 
-using ViewCs.Commands;
-using ViewCs.Models;
+using   ViewCs.Commands;
+using   ViewCs.Models;
 
 
-namespace  ViewCs.ViewModels  {
+namespace  MonitorLogger.ViewModels  {
 
 public  class  SampleViewModel : INotifyPropertyChanged
 {
@@ -198,4 +198,4 @@ public  class  SampleViewModel : INotifyPropertyChanged
 
 }   //  End class  SampleViewModel
 
-}   //  End of namespace  ViewCs.ViewModels
+}   //  End of namespace  MonitorLogger.ViewModels

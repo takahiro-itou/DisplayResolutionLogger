@@ -4,7 +4,7 @@ using System.Windows;
 using ViewCs;
 
 
-namespace  ViewCs.Views  {
+namespace  MonitorLogger.Views  {
 
 public  partial class  MainWindow : Window
 {
@@ -29,4 +29,4 @@ public  partial class  MainWindow : Window
 
 }   //  End class  MainWindow
 
-}   //  End of namespace  ViewCs.Views
+}   //  End of namespace  MonitorLogger.Views

@@ -1,8 +1,8 @@
 ﻿
-using System;
+using   System;
 
 
-namespace  ViewCs.Models  {
+namespace  MonitorLogger.Models  {
 
 public  class  SampleModel
 {
@@ -81,4 +81,4 @@ public  class  SampleModel
 
 }   //  End class  SampleModel
 
-}   //  End of namespace  ViewCs.Models
+}   //  End of namespace  MonitorLogger.Models
