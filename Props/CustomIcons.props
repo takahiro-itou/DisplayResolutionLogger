@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+  <Target Name="ResolveAppIcons" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <AppIcon1>Resources\App.ico</AppIcon1>
+      <DefaultIcon>Resources\MainWindow.ico</DefaultIcon>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="Exists('$(AppIcon1)')">
+      <SelectedExeIcon>$(AppIcon1)</SelectedExeIcon>
+      <SelectedEmbedIcon>$(AppIcon1)</SelectedEmbedIcon>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$([System.String]::IsNullOrEmpty($(SelectedExeIcon)))' And Exists('$(DefaultIcon)')">
+      <!-- .exe用は無し（Windows標準）にし、埋め込みリソースだけ指定 -->
+      <SelectedEmbedIcon>$(DefaultIcon)</SelectedEmbedIcon>
+    </PropertyGroup>
+  </Target>
+
 </Project>
