@@ -25,6 +25,6 @@
   <ItemGroup>
   </ItemGroup>
 
-  <Import Project="..\Targets.props" />
+  <Import Project="Targets.props" />
 
 </Project>
