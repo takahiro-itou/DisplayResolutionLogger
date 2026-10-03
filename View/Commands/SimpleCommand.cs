@@ -1,7 +1,7 @@
-﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
-**                  ---  WPF UserControl Library.  ---                  **
+**                  --  Display Resolution Logger.  --                  **
 **                                                                      **
 **          Copyright (C), 2026-2026, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
@@ -12,12 +12,12 @@
 **                                                                      **
 *************************************************************************/
 
-using System;
-using System.ComponentModel;
-using System.Windows.Input;
+using   System;
+using   System.ComponentModel;
+using   System.Windows.Input;
 
 
-namespace  ViewCs.Commands  {
+namespace  MonitorLogger.Commands  {
 
 //========================================================================
 //
@@ -103,4 +103,4 @@ public  class  SimpleCommand : ICommand
 
 }   //  End class  SimpleCommand
 
-}   //  End of namespace  ViewCs.Commands
+}   //  End of namespace  MonitorLogger.Commands

@@ -1,8 +1,8 @@
 ﻿
-<Application x:Class="ViewCs.App"
+<Application x:Class="MonitorLogger.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:ViewCs"
+    xmlns:local="clr-namespace:MonitorLogger"
     StartupUri="Views/MainWindow.xaml"
 >
   <Application.Resources>

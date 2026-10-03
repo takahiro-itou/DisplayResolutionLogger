@@ -7,21 +7,21 @@
     <Nullable>enable</Nullable>
     <OutputType>WinExe</OutputType>
     <Platforms>x64;x86</Platforms>
-    <RootNamespace>ViewCs</RootNamespace>
+    <RootNamespace>MonitorLogger</RootNamespace>
     <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+
+    <!-- NotifyIcon の利用に必要 -->
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <Import Project="..\Props\OutputApps.props" />
 
+  <Import Project="..\Props\CustomIcons.props" />
+
   <ItemGroup>
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="Commands\SimpleCommand.cs" />
-    <Compile Include="Models\SampleModel.cs" />
-    <Compile Include="ViewModels\SampleViewModel.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs" />
-  </ItemGroup>
+  <Import Project="Targets.props" />
 
 </Project>
