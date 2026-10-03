@@ -1,7 +1,7 @@
-﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
-**                  ---  WPF UserControl Library.  ---                  **
+**                  --  Display Resolution Logger.  --                  **
 **                                                                      **
 **          Copyright (C), 2026-2026, Takahiro Itou                     **
 **          All Rights Reserved.                                        **

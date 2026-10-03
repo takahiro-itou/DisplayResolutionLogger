@@ -7,9 +7,14 @@
     xmlns:local="clr-namespace:MonitorLogger"
     Title="MainWindow"
     Height="512" Width="440"
-
-    Icon="${Binding Source=Resources/MainWindowEmbedded.ico, TargetNullValue={x:Null}, FallbackValue={x:null}"
 >
+  <Window.Icon>
+    <Binding
+        Source="Resources/MainWindowEmbedded.ico"
+        FallbackValue="{x:Null}"
+        TargetNullValue="{x:Null}" />
+  </Window.Icon>
+
   <Window.Resources>
     <BooleanToVisibilityConverter x:Key="Bool2Visible" />
   </Window.Resources>
