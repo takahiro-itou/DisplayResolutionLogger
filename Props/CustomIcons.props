@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="ResolveAppIcons" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <AppIcon1>Resources\App.ico</AppIcon1>
+      <DefaultIcon>Resources\MainWindow.ico</DefaultIcon>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="Exists('$(AppIcon1)')">
+      <SelectedExeIcon>$(AppIcon1)</SelectedExeIcon>
+    </PropertyGroup>
+
+    <!--  EXE ファイル用アイコンが確定した場合は適用  -->
+    <PropertyGroup Condition="'$(SelectedExeIcon)' != ''">
+      <ApplicationIcon>$(SelectedExeIcon)</ApplicationIcon>
+    </PropertyGroup>
+
+    <!--  メインウィンドウ用のデフォルトアイコン  -->
+    <ItemGroup Condition="Exists('$(DefaultIcon)')">
+      <Resource
+          Include="$(DefaultIcon)"
+          Link="Resources\MainWindowEmbedded.ico"
+      />
+    </ItemGroup>
+
+    <Message
+        Importance="high"
+        Text="[.exe Icon] -> $(SelectedExeIcon)"
+        Condition="'$(SelectedExeIcon)' != ''"
+    />
+  </Target>
+
+</Project>

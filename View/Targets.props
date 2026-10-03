@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <Import Project="..\WpfHelper\WpfHelper.props" />
+
+  <ItemGroup>
+    <Compile Include="App.xaml.cs" />
+
+    <Compile Include="Commands\SimpleCommand.cs" />
+    <Compile Include="Models\SampleModel.cs" />
+    <Compile Include="ViewModels\SampleViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs" />
+  </ItemGroup>
+
+</Project>

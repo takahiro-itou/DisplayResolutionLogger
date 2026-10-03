@@ -1,8 +1,26 @@
-﻿
-using System;
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
+/*************************************************************************
+**                                                                      **
+**                  --  Display Resolution Logger.  --                  **
+**                                                                      **
+**          Copyright (C), 2026-2026, Takahiro Itou                     **
+**          All Rights Reserved.                                        **
+**                                                                      **
+**          License: (See COPYING or LICENSE files)                     **
+**          GNU Affero General Public License (AGPL) version 3,         **
+**          or (at your option) any later version.                      **
+**                                                                      **
+*************************************************************************/
+
+using   System;
 
 
-namespace  ViewCs.Models  {
+namespace  MonitorLogger.Models  {
+
+//========================================================================
+//
+//    SampleModel  class
+//
 
 public  class  SampleModel
 {
@@ -12,14 +30,14 @@ public  class  SampleModel
 //    Constructor(s) and Destructor.
 //
 
-    //----------------------------------------------------------------
-    /**   コンストラクタ。
-    **
-    **/
-    public SampleModel()
-    {
-        this.m_resultText = "";
-    }
+//----------------------------------------------------------------
+/**   コンストラクタ。
+**
+**/
+public SampleModel()
+{
+    this.m_resultText = "";
+}
 
 
 //========================================================================
@@ -27,32 +45,32 @@ public  class  SampleModel
 //    Public Properties.
 //
 
-    //----------------------------------------------------------------
-    /**   モデルのタスクを実行する。
-    **
-    **/
-    public  virtual  int
-    executeCommand(IProgress<int>  progress)
-    {
-        using (var process = new System.Diagnostics.Process()) {
-            process.StartInfo.FileName = "ipconfig.exe";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardInput = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = false;
-            process.Start();
+//----------------------------------------------------------------
+/**   モデルのタスクを実行する。
+**
+**/
+public  virtual  int
+executeCommand(IProgress<int>  progress)
+{
+    using (var process = new System.Diagnostics.Process()) {
+        process.StartInfo.FileName = "ipconfig.exe";
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.RedirectStandardInput = false;
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = false;
+        process.Start();
 
-            System.IO.StreamReader reader = process.StandardOutput;
-            string  output  = reader.ReadToEnd();
+        System.IO.StreamReader reader = process.StandardOutput;
+        string  output  = reader.ReadToEnd();
 
-            this.ResultText = output;
-            process.WaitForExit();
-            process.Close();
-        }
-
-        progress.Report(100);
-        return ( 0 );
+        this.ResultText = output;
+        process.WaitForExit();
+        process.Close();
     }
+
+    progress.Report(100);
+    return ( 0 );
+}
 
 
 //========================================================================
@@ -60,11 +78,15 @@ public  class  SampleModel
 //    Properties.
 //
 
-    public  string
-    ResultText  {
-        get { return  this.m_resultText; }
-        set { this.m_resultText = value; }
-    }
+//----------------------------------------------------------------
+/**
+**
+**/
+public  string
+ResultText  {
+    get { return  this.m_resultText; }
+    set { this.m_resultText = value; }
+}
 
 
 //========================================================================
@@ -77,8 +99,9 @@ public  class  SampleModel
 //    Member Variables.
 //
 
-    private  string     m_resultText;
+private   string    m_resultText;
+
 
 }   //  End class  SampleModel
 
-}   //  End of namespace  ViewCs.Models
+}   //  End of namespace  MonitorLogger.Models

@@ -1,13 +1,20 @@
 ﻿
-<Window x:Class="ViewCs.Views.MainWindow"
+<Window x:Class="MonitorLogger.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:ViewCs"
+    xmlns:local="clr-namespace:MonitorLogger"
     Title="MainWindow"
     Height="512" Width="440"
 >
+  <Window.Icon>
+    <Binding
+        Source="Resources/MainWindowEmbedded.ico"
+        FallbackValue="{x:Null}"
+        TargetNullValue="{x:Null}" />
+  </Window.Icon>
+
   <Window.Resources>
     <BooleanToVisibilityConverter x:Key="Bool2Visible" />
   </Window.Resources>
