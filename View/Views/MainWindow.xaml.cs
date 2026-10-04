@@ -17,7 +17,7 @@ using   System;
 using   System.Windows;
 using   System.Windows.Media.Imaging;
 
-using   MonitorLogger.Service;
+using   MonitorLogger.Services;
 
 
 namespace  MonitorLogger.Views  {
@@ -108,7 +108,7 @@ WriteDetailLog(
         var friendlyNames = MonitorService.GetMonitorFriendlyNames();
         foreach ( string s in friendlyNames.Keys ) {
             string value = friendlyNames[s];
-            sb.AppendLine($"Key = {s} Value = {value}")
+            sb.AppendLine($"Key = {s} Value = {value}");
         }
 
         var allScreens = System.Windows.Forms.Screen.AllScreens;
