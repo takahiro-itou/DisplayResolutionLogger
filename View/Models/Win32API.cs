@@ -60,6 +60,44 @@ public  struct  DISPLAYCONFIG_PATH_TARGET_INFO
     public  uint    statusFlags;
 }
 
+[StructLayout(LayoutKind.Sequential)]
+public  struct  DISPLAYCONFIG_PATH_INFO
+{
+    public  DISPLAYCONFIG_PATH_SOURCE_INFO  sourceInfo;
+    public  DISPLAYCONFIG_PATH_TARGET_INFO  targetInfo;
+    public  uint                            flags;
+}
+
+
+[StructLayout(LayoutKind.Sequential)]
+public  struct  DISPLAYCONFIG_MODE_INFO
+{
+    public  uint    infoType;
+    public  uint    id;
+    public  LUID    adapterId;
+    public  uint    dummy1;
+    public  uint    dummy2;
+    public  uint    dummy3;
+    public  uint    dummy4;
+    public  uint    dummy5;
+    public  uint    dummy6;
+    public  uint    dummy7;
+}
+
+public  enum  DISPLAYCONFIG_DEVICE_INFO_TYPE : uint
+{
+    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME = 2
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public  struct  DISPLAYCONFIG_DEVICE_INFO_HEADER
+{
+    public  DISPLAYCONFIG_DEVICE_INFO_TYPE  type;
+    public  uint    size;
+    public  LUID    adapterId;
+    public  uint    id;
+}
+
 
 }   //  End class  Win32API
 
