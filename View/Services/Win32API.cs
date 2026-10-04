@@ -27,6 +27,9 @@ namespace  MonitorLogger.Services  {
 public  class  Win32API
 {
 
+public  const   int     ERROR_SUCCESS           = 0;
+public  const   uint    QDC_ONLY_ACTIVE_PATHS   = 2;
+
 [StructLayout(LayoutKind.Sequential)]
 public  struct  LUID
 {

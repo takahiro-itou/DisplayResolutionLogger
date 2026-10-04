@@ -10,6 +10,7 @@
 
     <Compile Include="Models\SampleModel.cs" />
 
+    <Compile Include="Services\MonitorService.cs" />
     <Compile Include="Services\Win32API.cs" />
 
     <Compile Include="ViewModels\SampleViewModel.cs" />
