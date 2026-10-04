@@ -73,6 +73,63 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
     }
 }
 
+
+private  void
+OnDisplaySettingsChanged(object? sender, EventArgs e)
+{
+}
+
+
+//========================================================================
+//
+//    For Internal Use Only.
+//
+
+//----------------------------------------------------------------
+/**
+**
+**/
+private  void
+WriteDetailLog(
+        System.String   eventTitle)
+{
+    try {
+        var sb = new StringBuilder();
+        sb.AppendLine("==================================================");
+        sb.AppendLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {eventTitle}");
+        sb.AppendLine("==================================================");
+
+        // 全モニター数の取得
+        var allScreens = System.Windows.Forms.Screen.AllScreens;
+        sb.AppendLine($"認識されているモニター数: {allScreens.Length}");
+
+        for (int i = 0; i < allScreens.Length; i++)
+        {
+            var scr = allScreens[i];
+            sb.AppendLine($"--- モニター [{i}] --------------------");
+            sb.AppendLine($"  ・デバイス名  : {scr.DeviceName}");
+            sb.AppendLine($"  ・メイン画面  : {(scr.Primary ? "はい (Primary)" : "いいえ")}");
+            sb.AppendLine($"  ・解像度(全体): {scr.Bounds.Width} x {scr.Bounds.Height}");
+            sb.AppendLine($"  ・配置座標    : X={scr.Bounds.X}, Y={scr.Bounds.Y}");
+            sb.AppendLine($"  ・作業領域    : {scr.WorkingArea.Width} x {scr.WorkingArea.Height} (タスクバー等を除く)");
+        }
+
+        // RegistryからDPIの目安を取得 (C# 8.0の switch 式を活用)
+        var registryValue = Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "AppliedDPI", 96);
+        int dpi = registryValue is int val ? val : 96;
+
+        sb.AppendLine("--------------------------------------------------");
+        sb.AppendLine($"システムDPIの目安: {dpi} DPI");
+        sb.AppendLine(); // 空行
+
+        // ファイルに追記
+        System.IO.File.AppendAllText(_logFilePath, sb.ToString(), Encoding.UTF8);
+    } catch (Exception ex) {
+        System.Diagnostics.Debug.WriteLine($"ログ出力エラー: {ex.Message}");
+    }
+}
+
+
 //========================================================================
 //
 //    Member Variables.
