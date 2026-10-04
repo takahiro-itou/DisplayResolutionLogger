@@ -124,6 +124,10 @@ WriteDetailLog(
             sb.AppendLine($"  ・解像度(全体): {scr.Bounds.Width} x {scr.Bounds.Height}");
             sb.AppendLine($"  ・配置座標    : X={scr.Bounds.X}, Y={scr.Bounds.Y}");
             sb.AppendLine($"  ・作業領域    : {scr.WorkingArea.Width} x {scr.WorkingArea.Height} (タスクバー等を除く)");
+
+            string  friendlyName = this.m_srvMonitor.FindMonitorFriendlyNames(
+                    scr.DeviceName);
+            sb.AppendLine($"  ・モニター製品名: {friendlyName}");
         }
 
         // RegistryからDPIの目安を取得 (C# 8.0の switch 式を活用)

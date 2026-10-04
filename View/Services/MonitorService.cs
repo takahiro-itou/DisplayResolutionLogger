@@ -48,6 +48,30 @@ public  MonitorService()
 //    Public Member Functions.
 //
 
+public  string
+FindMonitorFriendlyNames(
+        string  deviceName)
+{
+    string  retName = "取得失敗（未接続または汎用扱い）";
+    foreach (var kvp in this.m_friendlyNames ) {
+        if ( kvp.Key.Contains(deviceName.Replace(".", ""), StringComparison.OrdinalIgnoreCase)
+            || deviceName.Contains(kvp.Key, StringComparison.OrdinalIgnoreCase))
+        {
+            retName = kvp.Value;
+        }
+    }
+
+    //  もし部分一致で見つからず、モニターが1つだけならそれを割り当てる（フォールバック）
+    if ( friendlyName.StartsWith("取得失敗") && friendlyNames.Count == 1 )
+    {
+        foreach ( var val in this.m_friendlyNames.Values ) {
+            retName = val;
+        }
+    }
+
+    return ( retName );
+}
+
 //----------------------------------------------------------------
 /**   アクティブなモニター（製品名）を取得する。
 **
