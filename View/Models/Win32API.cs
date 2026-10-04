@@ -117,6 +117,29 @@ public  struct  DISPLAYCONFIG_TARGET_DEVICE_NAME
 }
 
 
+[DllImport("user32.dll")]
+public  static  exter  int
+GetDisplayConfigBufferSizes(
+    uint        flags,
+    out uint    numPathArrayElements,
+    out uint    numModeInfoArrayElements);
+
+[DllImport("user32.dll")]
+public  static  extern  int
+QueryDisplayConfig(
+    uint        flags,
+    ref uint    numPathArrayElements,
+    [Out] DISPLAYCONFIG_PATH_INFO[] pathArray,
+    ref uint    numModeInfoArrayElements,
+    [Out] DISPLAYCONFIG_MODE_INFO[] modeInfoArray,
+    IntPtr      currentTopologyId);
+
+[DllImport("user32.dll")]
+public  static  extern  int
+DisplayConfigGetDeviceInfo(
+    ref DISPLAYCONFIG_TARGET_DEVICE_NAME deviceName);
+
+
 }   //  End class  Win32API
 
 }   //  End of namespace  MonitorLogger.Models
