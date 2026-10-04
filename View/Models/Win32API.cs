@@ -118,7 +118,7 @@ public  struct  DISPLAYCONFIG_TARGET_DEVICE_NAME
 
 
 [DllImport("user32.dll")]
-public  static  exter  int
+public  static  extern  int
 GetDisplayConfigBufferSizes(
     uint        flags,
     out uint    numPathArrayElements,
