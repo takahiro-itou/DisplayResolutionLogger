@@ -12,6 +12,7 @@
 **                                                                      **
 *************************************************************************/
 
+using   Microsoft.Win32;
 using   System;
 using   System.Windows;
 using   System.Windows.Media.Imaging;
@@ -98,7 +99,7 @@ WriteDetailLog(
         System.String   eventTitle)
 {
     try {
-        var sb = new StringBuilder();
+        var sb = new System.Text.StringBuilder();
         sb.AppendLine("==================================================");
         sb.AppendLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {eventTitle}");
         sb.AppendLine("==================================================");
