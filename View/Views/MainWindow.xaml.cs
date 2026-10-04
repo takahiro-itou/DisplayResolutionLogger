@@ -128,7 +128,8 @@ WriteDetailLog(
         sb.AppendLine(); // 空行
 
         // ファイルに追記
-        System.IO.File.AppendAllText(_logFilePath, sb.ToString(), Encoding.UTF8);
+        System.IO.File.AppendAllText(
+            LogFilePath, sb.ToString(), System.Text.Encoding.UTF8);
     } catch (Exception ex) {
         System.Diagnostics.Debug.WriteLine($"ログ出力エラー: {ex.Message}");
     }
