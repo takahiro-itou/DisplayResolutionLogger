@@ -14,6 +14,7 @@
 
 using   System;
 using   System.Collections.Generic;
+using   System.Runtime.InteropServices;
 
 
 namespace  MonitorLogger.Services  {
@@ -30,41 +31,41 @@ public  class  MonitorService
 /**   アクティブなモニター（製品名）を取得する。
 **
 **/
-public  Dictionary<string, string>
+public  static  Dictionary<string, string>
 GetMonitorFriendlyNames()
 {
     var friendlyNames = new Dictionary<string, string>(
             StringComparer.OrdinalIgnoreCase);
 
-    if ( Win32API.GetDisplayConfigBufferSize(
+    if ( Win32API.GetDisplayConfigBufferSizes(
             Win32API.QDC_ONLY_ACTIVE_PATHS,
             out uint pathCount,
-            out uint modeCount) != ERROR_SUCCESS )
+            out uint modeCount) != Win32API.ERROR_SUCCESS )
     {
         return ( friendlyNames );
     }
 
-    var paths = new DISPLAYCONFIG_PATH_INFO[pathCount];
-    var modes = new DISPLAYCONFIG_MODE_INFO[modeCount];
+    var paths = new Win32API.DISPLAYCONFIG_PATH_INFO[pathCount];
+    var modes = new Win32API.DISPLAYCONFIG_MODE_INFO[modeCount];
 
     if ( Win32API.QueryDisplayConfig(
             Win32API.QDC_ONLY_ACTIVE_PATHS,
             ref pathCount, paths,
             ref modeCount, modes,
-            IntPtr.Zero) != ERROR_SUCCESS )
+            IntPtr.Zero) != Win32API.ERROR_SUCCESS )
     {
         return ( friendlyNames );
     }
 
     for ( int i = 0; i < pathCount; ++ i ) {
-        var deviceName = new DISPLAYCONFIG_TARGET_DEVICE_NAME();
-        deviceName.header.type = DISPLAYCONFIG_DEVICE_INFO_TYPE.DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME;
-         deviceName.header.size = (uint)Marshal.SizeOf(typeof(DISPLAYCONFIG_TARGET_DEVICE_NAME));
+        var deviceName = new Win32API.DISPLAYCONFIG_TARGET_DEVICE_NAME();
+        deviceName.header.type = Win32API.DISPLAYCONFIG_DEVICE_INFO_TYPE.DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME;
+         deviceName.header.size = (uint)Marshal.SizeOf(typeof(Win32API.DISPLAYCONFIG_TARGET_DEVICE_NAME));
         deviceName.header.adapterId = paths[i].targetInfo.adapterId;
         deviceName.header.id = paths[i].targetInfo.id;
 
         if ( Win32API.DisplayConfigGetDeviceInfo(
-                ref deviceName) != ERROR_SUCCESS )
+                ref deviceName) != Win32API.ERROR_SUCCESS )
         {
             continue;
         }
