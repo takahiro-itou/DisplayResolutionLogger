@@ -76,16 +76,8 @@ public  struct  DISPLAYCONFIG_PATH_INFO
 [StructLayout(LayoutKind.Sequential)]
 public  struct  DISPLAYCONFIG_MODE_INFO
 {
-    public  uint    infoType;
-    public  uint    id;
-    public  LUID    adapterId;
-    public  uint    dummy1;
-    public  uint    dummy2;
-    public  uint    dummy3;
-    public  uint    dummy4;
-    public  uint    dummy5;
-    public  uint    dummy6;
-    public  uint    dummy7;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 64)]
+    public  byte[]  dummy;
 }
 
 public  enum  DISPLAYCONFIG_DEVICE_INFO_TYPE : uint
