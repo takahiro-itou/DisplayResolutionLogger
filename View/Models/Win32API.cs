@@ -13,6 +13,7 @@
 *************************************************************************/
 
 using   Microsoft.Win32;
+using   System.Runtime.InteropServices;
 
 
 namespace  MonitorLogger.Models  {
@@ -22,9 +23,15 @@ namespace  MonitorLogger.Models  {
 //    Win32API  class
 //
 
-public  Win32API
+public  class  Win32API
 {
 
+[StructLayout(LayoutKind.Sequential)]
+private  struct  LUID
+{
+    public  uint    LowPart;
+    public  int     HightPart;
+};
 
 }   //  End class  Win32API
 
