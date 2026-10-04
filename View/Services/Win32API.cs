@@ -13,10 +13,11 @@
 *************************************************************************/
 
 using   Microsoft.Win32;
+using   System;
 using   System.Runtime.InteropServices;
 
 
-namespace  MonitorLogger.Models  {
+namespace  MonitorLogger.Services  {
 
 //========================================================================
 //
@@ -142,4 +143,4 @@ DisplayConfigGetDeviceInfo(
 
 }   //  End class  Win32API
 
-}   //  End of namespace  MonitorLogger.Models
+}   //  End of namespace  MonitorLogger.Services
