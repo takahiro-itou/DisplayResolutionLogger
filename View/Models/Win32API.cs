@@ -99,6 +99,24 @@ public  struct  DISPLAYCONFIG_DEVICE_INFO_HEADER
 }
 
 
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+public  struct  DISPLAYCONFIG_TARGET_DEVICE_NAME
+{
+    public  DISPLAYCONFIG_DEVICE_INFO_HEADER    header;
+    public  uint    flags;
+    public  uint    outputTechnology;
+    public  ushort  edidManufactureId;
+    public  ushort  edidProductCodeId;
+    public  uint    connectorInstance;
+
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+    public  string  monitorFriendlyDeviceName;
+
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+    public  string  monitorDevicePath;
+}
+
+
 }   //  End class  Win32API
 
 }   //  End of namespace  MonitorLogger.Models
