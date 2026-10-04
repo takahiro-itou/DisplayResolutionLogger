@@ -140,6 +140,11 @@ WriteDetailLog(
 //    Member Variables.
 //
 
+private   static  readonly  string  LogFilePath =
+    System.IO.Path.Combine(
+        AppDomain.CurrentDomain.BaseDirectory,
+        "Resolution.log");
+
 private   Models.SampleModel            m_taskModel;
 private   ViewModels.SampleViewModel    m_viewModel;
 
