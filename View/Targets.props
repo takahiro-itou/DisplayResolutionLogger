@@ -7,7 +7,10 @@
     <Compile Include="App.xaml.cs" />
 
     <Compile Include="Commands\SimpleCommand.cs" />
+
     <Compile Include="Models\SampleModel.cs" />
+    <Compile Include="Models\Win32API.cs" />
+
     <Compile Include="ViewModels\SampleViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs" />
   </ItemGroup>
