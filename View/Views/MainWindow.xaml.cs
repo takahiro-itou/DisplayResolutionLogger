@@ -71,12 +71,16 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
                 $"Failed custom icon: {ex.Message}");
         }
     }
+
+    WriteDetailedLog("【プログラム起動】現在のディスプレイ構成");
+    SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
 }
 
 
 private  void
 OnDisplaySettingsChanged(object? sender, EventArgs e)
 {
+    WriteDetailedLog("【イベント検知】画面構成または解像度の変更が発生しました");
 }
 
 
