@@ -17,7 +17,7 @@ using   System;
 using   System.Windows;
 using   System.Windows.Media.Imaging;
 
-using   MonitorLogger;
+using   MonitorLogger.Services;
 
 
 namespace  MonitorLogger.Views  {
@@ -105,6 +105,12 @@ WriteDetailLog(
         sb.AppendLine("==================================================");
 
         // 全モニター数の取得
+        var friendlyNames = MonitorService.GetMonitorFriendlyNames();
+        foreach ( string s in friendlyNames.Keys ) {
+            string value = friendlyNames[s];
+            sb.AppendLine($"Key = {s} Value = {value}");
+        }
+
         var allScreens = System.Windows.Forms.Screen.AllScreens;
         sb.AppendLine($"認識されているモニター数: {allScreens.Length}");
 
