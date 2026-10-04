@@ -13,6 +13,7 @@
 *************************************************************************/
 
 using   System;
+using   System.Collections.Generic;
 
 
 namespace  MonitorLogger.Services  {
@@ -28,7 +29,7 @@ public  class  MonitorService
 //----------------------------------------------------------------
 /**   アクティブなモニター（製品名）を取得する。
 **
-**?
+**/
 public  Dictionary<string, string>
 GetMonitorFriendlyNames()
 {
