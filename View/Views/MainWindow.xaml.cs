@@ -45,8 +45,9 @@ public  MainWindow()
 
     this.Loaded += MainWindow_Loaded;
 
-    this.m_taskModel = new Models.SampleModel();
-    this.m_viewModel = new ViewModels.SampleViewModel(this.m_taskModel);
+    this.m_srvMonitor = new Services.MonitorService();
+    this.m_taskModel  = new Models.SampleModel();
+    this.m_viewModel  = new ViewModels.SampleViewModel(this.m_taskModel);
 
     this.DataContext = this.m_viewModel;
 }
@@ -105,7 +106,7 @@ WriteDetailLog(
         sb.AppendLine("==================================================");
 
         // 全モニター数の取得
-        var friendlyNames = MonitorService.GetMonitorFriendlyNames();
+        var friendlyNames = this.m_srvMonitor.GetMonitorFriendlyNames();
         foreach ( string s in friendlyNames.Keys ) {
             string value = friendlyNames[s];
             sb.AppendLine($"Key = {s} Value = {value}");
@@ -152,6 +153,7 @@ private   static  readonly  string  LogFilePath =
         AppDomain.CurrentDomain.BaseDirectory,
         "Resolution.log");
 
+private   readonly  MonitorService      m_srvMonitor;
 private   Models.SampleModel            m_taskModel;
 private   ViewModels.SampleViewModel    m_viewModel;
 

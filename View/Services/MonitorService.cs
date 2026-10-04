@@ -27,6 +27,27 @@ namespace  MonitorLogger.Services  {
 public  class  MonitorService
 {
 
+//========================================================================
+//
+//    Constructor(s) and Destructor.
+//
+
+//----------------------------------------------------------------
+/**   デフォルトコンストラクタ。
+**
+**/
+public  MonitorService()
+{
+    this.m_friendlyNames = new Dictionary<string, string>(
+            StringComparer.OrdinalIgnoreCase);
+}
+
+
+//========================================================================
+//
+//    Public Member Functions.
+//
+
 //----------------------------------------------------------------
 /**   アクティブなモニター（製品名）を取得する。
 **
@@ -34,8 +55,8 @@ public  class  MonitorService
 public  static  Dictionary<string, string>
 GetMonitorFriendlyNames()
 {
-    var friendlyNames = new Dictionary<string, string>(
-            StringComparer.OrdinalIgnoreCase);
+    Dictionary<string, string>  friendlyNames = this.m_friendlyNames;
+    friendlyNames.Clear();
 
     if ( Win32API.GetDisplayConfigBufferSizes(
             Win32API.QDC_ONLY_ACTIVE_PATHS,
@@ -76,6 +97,14 @@ GetMonitorFriendlyNames()
 
     return ( friendlyNames );
 }
+
+
+//========================================================================
+//
+//    Member Variables.
+//
+
+private   Dictionary<string, string>    m_friendlyNames;
 
 
 }   //  End class  MonitorService
