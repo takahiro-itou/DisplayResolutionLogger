@@ -52,7 +52,7 @@ public  MonitorService()
 /**   アクティブなモニター（製品名）を取得する。
 **
 **/
-public  static  Dictionary<string, string>
+public  Dictionary<string, string>
 GetMonitorFriendlyNames()
 {
     Dictionary<string, string>  friendlyNames = this.m_friendlyNames;
