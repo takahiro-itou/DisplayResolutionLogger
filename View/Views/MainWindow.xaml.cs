@@ -72,7 +72,7 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
         }
     }
 
-    WriteDetailedLog("【プログラム起動】現在のディスプレイ構成");
+    WriteDetailLog("【プログラム起動】現在のディスプレイ構成");
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
 }
 
@@ -80,7 +80,7 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
 private  void
 OnDisplaySettingsChanged(object? sender, EventArgs e)
 {
-    WriteDetailedLog("【イベント検知】画面構成または解像度の変更が発生しました");
+    WriteDetailLog("【イベント検知】画面構成または解像度の変更が発生しました");
 }
 
 
