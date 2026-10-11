@@ -94,9 +94,10 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
 }
 
 
-private  void
+private  async  void
 OnDisplaySettingsChanged(object? sender, EventArgs e)
 {
+    await System.Threading.Tasks.Task.Delay(200);
     WriteDetailLog("【イベント検知】画面構成または解像度の変更が発生しました");
 }
 
