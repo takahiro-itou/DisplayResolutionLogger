@@ -27,15 +27,60 @@ namespace  MonitorLogger.Services  {
 public  class  MonitorService
 {
 
+//========================================================================
+//
+//    Constructor(s) and Destructor.
+//
+
+//----------------------------------------------------------------
+/**   デフォルトコンストラクタ。
+**
+**/
+public  MonitorService()
+{
+    this.m_friendlyNames = new Dictionary<string, string>(
+            StringComparer.OrdinalIgnoreCase);
+}
+
+
+//========================================================================
+//
+//    Public Member Functions.
+//
+
+public  string
+FindMonitorFriendlyNames(
+        string  deviceName)
+{
+    string  retName = "取得失敗（未接続または汎用扱い）";
+    foreach ( var kvp in this.m_friendlyNames ) {
+        if ( kvp.Key.IndexOf(deviceName.Replace(".", ""), StringComparison.OrdinalIgnoreCase) >= 0
+            || deviceName.IndexOf(kvp.Key, StringComparison.OrdinalIgnoreCase) >= 0)
+        {
+            retName = kvp.Value;
+        }
+    }
+
+    //  もし部分一致で見つからず、モニターが1つだけならそれを割り当てる（フォールバック）
+    if ( retName.StartsWith("取得失敗") && m_friendlyNames.Count == 1 )
+    {
+        foreach ( var val in this.m_friendlyNames.Values ) {
+            retName = val;
+        }
+    }
+
+    return ( retName );
+}
+
 //----------------------------------------------------------------
 /**   アクティブなモニター（製品名）を取得する。
 **
 **/
-public  static  Dictionary<string, string>
+public  Dictionary<string, string>
 GetMonitorFriendlyNames()
 {
-    var friendlyNames = new Dictionary<string, string>(
-            StringComparer.OrdinalIgnoreCase);
+    Dictionary<string, string>  friendlyNames = this.m_friendlyNames;
+    friendlyNames.Clear();
 
     if ( Win32API.GetDisplayConfigBufferSizes(
             Win32API.QDC_ONLY_ACTIVE_PATHS,
@@ -76,6 +121,14 @@ GetMonitorFriendlyNames()
 
     return ( friendlyNames );
 }
+
+
+//========================================================================
+//
+//    Member Variables.
+//
+
+private   Dictionary<string, string>    m_friendlyNames;
 
 
 }   //  End class  MonitorService

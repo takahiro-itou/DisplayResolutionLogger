@@ -45,10 +45,25 @@ public  MainWindow()
 
     this.Loaded += MainWindow_Loaded;
 
-    this.m_taskModel = new Models.SampleModel();
-    this.m_viewModel = new ViewModels.SampleViewModel(this.m_taskModel);
+    this.m_srvMonitor = new Services.MonitorService();
+    this.m_taskModel  = new Models.SampleModel();
+    this.m_viewModel  = new ViewModels.SampleViewModel(this.m_taskModel);
 
     this.DataContext = this.m_viewModel;
+}
+
+
+//========================================================================
+//
+//    Protected Member Functions.
+//
+
+protected  override  void
+OnClosed(EventArgs e)
+{
+    SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
+    SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
+    base.OnClosed(e);
 }
 
 
@@ -74,14 +89,33 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
     }
 
     WriteDetailLog("【プログラム起動】現在のディスプレイ構成");
+    SystemEvents.PowerModeChanged       += OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
 }
 
 
-private  void
+private  async  void
 OnDisplaySettingsChanged(object? sender, EventArgs e)
 {
+    await System.Threading.Tasks.Task.Delay(200);
     WriteDetailLog("【イベント検知】画面構成または解像度の変更が発生しました");
+}
+
+
+private  void
+OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
+{
+      switch ( e.Mode ) {
+      case  PowerModes.Suspend:
+          WriteDetailLog("システムがスリープ/休止状態に移行します。");
+          break;
+      case  PowerModes.Resume:
+          WriteDetailLog("システムがスリープ/休止状態から復帰しました。");
+          break;
+      case  PowerModes.StatusChange:
+          WriteDetailLog("電源ステータスが変更されました。");
+          break;
+      }
 }
 
 
@@ -105,7 +139,7 @@ WriteDetailLog(
         sb.AppendLine("==================================================");
 
         // 全モニター数の取得
-        var friendlyNames = MonitorService.GetMonitorFriendlyNames();
+        var friendlyNames = this.m_srvMonitor.GetMonitorFriendlyNames();
         foreach ( string s in friendlyNames.Keys ) {
             string value = friendlyNames[s];
             sb.AppendLine($"Key = {s} Value = {value}");
@@ -123,6 +157,10 @@ WriteDetailLog(
             sb.AppendLine($"  ・解像度(全体): {scr.Bounds.Width} x {scr.Bounds.Height}");
             sb.AppendLine($"  ・配置座標    : X={scr.Bounds.X}, Y={scr.Bounds.Y}");
             sb.AppendLine($"  ・作業領域    : {scr.WorkingArea.Width} x {scr.WorkingArea.Height} (タスクバー等を除く)");
+
+            string  friendlyName = this.m_srvMonitor.FindMonitorFriendlyNames(
+                    scr.DeviceName);
+            sb.AppendLine($"  ・モニター製品名: {friendlyName}");
         }
 
         // RegistryからDPIの目安を取得 (C# 8.0の switch 式を活用)
@@ -152,6 +190,7 @@ private   static  readonly  string  LogFilePath =
         AppDomain.CurrentDomain.BaseDirectory,
         "Resolution.log");
 
+private   readonly  MonitorService      m_srvMonitor;
 private   Models.SampleModel            m_taskModel;
 private   ViewModels.SampleViewModel    m_viewModel;
 
