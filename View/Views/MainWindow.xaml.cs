@@ -139,6 +139,7 @@ WriteDetailLog(
         sb.AppendLine("==================================================");
 
         // 全モニター数の取得
+        sb.AppendLine("MonitorFriendlyNames:");
         var friendlyNames = this.m_srvMonitor.GetMonitorFriendlyNames();
         foreach ( string s in friendlyNames.Keys ) {
             string value = friendlyNames[s];
