@@ -55,6 +55,20 @@ public  MainWindow()
 
 //========================================================================
 //
+//    Protected Member Functions.
+//
+
+protected  override  void
+OnClosed(EventArgs e)
+{
+    SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
+    SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
+    base.OnClosed(e);
+}
+
+
+//========================================================================
+//
 //    Event Handlers.
 //
 
@@ -75,6 +89,7 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
     }
 
     WriteDetailLog("【プログラム起動】現在のディスプレイ構成");
+    SystemEvents.PowerModeChanged       += OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
 }
 
@@ -83,6 +98,23 @@ private  void
 OnDisplaySettingsChanged(object? sender, EventArgs e)
 {
     WriteDetailLog("【イベント検知】画面構成または解像度の変更が発生しました");
+}
+
+
+private  void
+OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
+{
+      switch ( e.Mode ) {
+      case  PowerModes.Suspend:
+          WriteDetailLog("システムがスリープ/休止状態に移行します。");
+          break;
+      case  PowerModes.Resume:
+          WriteDetailLog("システムがスリープ/休止状態から復帰しました。");
+          break;
+      case  PowerModes.StatusChange:
+          WriteDetailLog("電源ステータスが変更されました。");
+          break;
+      }
 }
 
 
