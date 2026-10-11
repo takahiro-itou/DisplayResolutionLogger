@@ -54,8 +54,8 @@ FindMonitorFriendlyNames(
 {
     string  retName = "取得失敗（未接続または汎用扱い）";
     foreach ( var kvp in this.m_friendlyNames ) {
-        if ( kvp.Key.Contains(deviceName.Replace(".", ""), StringComparison.OrdinalIgnoreCase)
-            || deviceName.Contains(kvp.Key, StringComparison.OrdinalIgnoreCase))
+        if ( kvp.Key.IndexOf(deviceName.Replace(".", ""), StringComparison.OrdinalIgnoreCase) >= 0
+            || deviceName.IndexOf(kvp.Key, StringComparison.OrdinalIgnoreCase) >= 0)
         {
             retName = kvp.Value;
         }
