@@ -8,6 +8,7 @@
 
     <Compile Include="Commands\SimpleCommand.cs" />
 
+    <Compile Include="Models\LogEntry.cs" />
     <Compile Include="Models\SampleModel.cs" />
 
     <Compile Include="Services\MonitorService.cs" />
