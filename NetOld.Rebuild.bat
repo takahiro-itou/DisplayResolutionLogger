@@ -8,9 +8,11 @@ set  target=Rebuild
 
 
 msbuild  -restore  -t:Clean     ^
-    -p:Configuration=%config%   -p:Platform=x64     ^
+    -p:Configuration=%config%   -p:Platform=x86     ^
     "%solution%.NetOld.sln"
 
 msbuild  -restore  -t:%target%  ^
-    -p:Configuration=%config%   -p:Platform=x64     ^
+    -p:Configuration=%config%   -p:Platform=x86     ^
     "%solution%.NetOld.sln"
+
+endlocal
