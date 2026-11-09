@@ -17,6 +17,15 @@ using   System;
 
 namespace  MonitorLogger.Models  {
 
+public  enum  LogEntryType
+{
+    PowerSuspend,
+    PowerResume,
+    PowerStatusChange,
+    DisplayChanged
+}
+
+
 //========================================================================
 //
 //    LogEntry  class
