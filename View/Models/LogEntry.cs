@@ -17,7 +17,7 @@ using   System;
 
 namespace  MonitorLogger.Models  {
 
-public  enum  LogEntryType
+public  enum  ELogEventType
 {
     PowerSuspend,
     PowerResume,
@@ -38,6 +38,28 @@ public  class  LogEntry
 //
 //    Constructor(s) and Destructor.
 //
+
+//----------------------------------------------------------------
+/**   コンストラクタ。
+**
+**/
+public  LogEntry()
+{
+}
+
+
+//========================================================================
+//
+//    Public Properties.
+//
+
+//----------------------------------------------------------------
+/**
+**
+**/
+public  ELogEventType
+EventKind { get; set; }
+
 
 //========================================================================
 //
