@@ -60,6 +60,13 @@ public  LogEntry()
 public  ELogEventType
 EventKind { get; set; }
 
+//----------------------------------------------------------------
+/**
+**
+**/
+public  System.String
+EventTitle { get; set; }
+
 
 //========================================================================
 //
