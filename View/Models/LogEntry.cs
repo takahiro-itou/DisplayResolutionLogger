@@ -57,6 +57,13 @@ public  LogEntry()
 /**
 **
 **/
+public  DateTime
+EventDateTime { get; set; }
+
+//----------------------------------------------------------------
+/**
+**
+**/
 public  ELogEventType
 EventKind { get; set; }
 
