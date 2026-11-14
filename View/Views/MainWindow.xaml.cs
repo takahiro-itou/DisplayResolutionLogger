@@ -54,9 +54,9 @@ public  MainWindow()
     this.DataContext = this.m_viewModel;
 
     //  テストデータ  //
-    var Items = ObservableCollection<LogEntry>();
+    var Items = new ObservableCollection<LogEntry>();
     Items.Add(new LogEntry {
-        EventDateTime = DateTime.now,
+        EventDateTime = DateTime.Now,
         EventKind = ELogEventType.DisplayChanged,
         EventTitle = "Change Resolution"
     });
