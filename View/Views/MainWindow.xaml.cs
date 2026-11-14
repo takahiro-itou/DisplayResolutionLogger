@@ -14,9 +14,11 @@
 
 using   Microsoft.Win32;
 using   System;
+using   System.Collections.ObjectModel;
 using   System.Windows;
 using   System.Windows.Media.Imaging;
 
+using   MonitorLogger.Models;
 using   MonitorLogger.Services;
 
 
@@ -50,6 +52,15 @@ public  MainWindow()
     this.m_viewModel  = new ViewModels.SampleViewModel(this.m_taskModel);
 
     this.DataContext = this.m_viewModel;
+
+    //  テストデータ  //
+    var Items = new ObservableCollection<LogEntry>();
+    Items.Add(new LogEntry {
+        EventDateTime = DateTime.Now,
+        EventKind = ELogEventType.DisplayChanged,
+        EventTitle = "Change Resolution"
+    });
+    lvwEvent.ItemsSource = Items;
 }
 
 

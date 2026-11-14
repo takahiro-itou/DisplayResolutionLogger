@@ -45,6 +45,7 @@ public  class  LogEntry
 **/
 public  LogEntry()
 {
+    this.EventTitle = "";
 }
 
 

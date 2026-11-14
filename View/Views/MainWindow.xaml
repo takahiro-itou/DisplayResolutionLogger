@@ -34,37 +34,20 @@
       </MenuItem>
     </Menu>
 
-    <StackPanel Orientation="Vertical">
-      <StackPanel Orientation="Horizontal">
-        <Label Margin="8,8,8,8" Content="_Command :" />
-        <TextBox x:Name="txtCommand"
-            Margin="8,8,8,8" Width="320"
-        />
-      </StackPanel>
-      <Button
-          Margin="8,8,8,8" Width="96"
-          Content="Run"
-          HorizontalAlignment="Left"
-          Command="{Binding RunModelTaskCommand}"
-      />
-      <ProgressBar
-          Margin="8,8,8,8" Height="16"
-          Visibility="{Binding IsRunning, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
-          IsIndeterminate="True"
-      />
-      <TextBox
-          Margin="8,8,8,8" Height="320"
-          IsReadOnly="True"
-          Text="{Binding ResultText, Mode=OneWay}"
-          HorizontalScrollBarVisibility="Auto"
-          VerticalScrollBarVisibility="Visible"
-      />
-      <TextBox
-          Margin="8,8,8,8"
-          IsReadOnly="True"
-          Text="{Binding ReturnCode, StringFormat='Return Code : {0}', Mode=OneWay}"
-      />
-    </StackPanel>
+    <Grid>
+      <ListView Margin="8" x:Name="lvwEvent">
+        <ListView.View>
+          <GridView>
+            <GridViewColumn
+              Width="50"
+              DisplayMemberBinding="{Binding EventTitle}"
+              Header="Title"
+            />
+          </GridView>
+        </ListView.View>
+      </ListView>
+    </Grid>
+
   </DockPanel>
 
 </Window>
