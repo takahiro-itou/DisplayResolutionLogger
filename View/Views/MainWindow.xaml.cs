@@ -14,6 +14,7 @@
 
 using   Microsoft.Win32;
 using   System;
+using   System.Collections.ObjectModel;
 using   System.Windows;
 using   System.Windows.Media.Imaging;
 
@@ -53,7 +54,7 @@ public  MainWindow()
     this.DataContext = this.m_viewModel;
 
     //  テストデータ  //
-    var Items = ObservableCollection<LogEntry>
+    var Items = ObservableCollection<LogEntry>();
     Items.Add(new LogEntry {
         EventDateTime = DateTime.now,
         EventKind = ELogEventType.DisplayChanged,
