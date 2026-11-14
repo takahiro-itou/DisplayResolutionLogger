@@ -41,11 +41,12 @@
             <GridViewColumn
               DisplayMemberBinding="{Binding EventDateTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss.fff}}"
               Header="Date Time"
+              Width="Auto"
             />
             <GridViewColumn
-              Width="50"
               DisplayMemberBinding="{Binding EventTitle}"
               Header="Title"
+              Width="Auto"
             />
           </GridView>
         </ListView.View>
