@@ -39,10 +39,23 @@
         <ListView.View>
           <GridView>
             <GridViewColumn
-              Width="50"
+              Header="Date Time"
+              Width="Auto"
+            >
+              <GridViewColumn.DisplayMemberBinding>
+                <Binding
+                  Path="EventDateTime"
+                  StringFormat="{}{0:yyyy/MM/dd HH:mm:ss.fff}"
+                />
+              </GridViewColumn.DisplayMemberBinding>
+            </GridViewColumn>
+
+            <GridViewColumn
               DisplayMemberBinding="{Binding EventTitle}"
               Header="Title"
+              Width="Auto"
             />
+
           </GridView>
         </ListView.View>
       </ListView>
