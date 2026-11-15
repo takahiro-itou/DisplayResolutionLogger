@@ -58,7 +58,9 @@ public  MainWindow()
     Items.Add(new LogEntry {
         EventDateTime = DateTime.Now,
         EventKind = ELogEventType.DisplayChanged,
-        EventTitle = "Change Resolution"
+        EventTitle = "Change Resolution",
+        ScreenHeight = 1080,
+        ScreenWidth = 1960
     });
     lvwEvent.ItemsSource = Items;
 }
