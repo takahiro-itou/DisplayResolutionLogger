@@ -95,7 +95,8 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
     }
 
     WriteDetailLog(
-        "Start", "【プログラム起動】現在のディスプレイ構成");
+        ELogEventType.ProgramStarted, "Start",
+        "【プログラム起動】現在のディスプレイ構成");
     SystemEvents.PowerModeChanged       += OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
 }
@@ -106,7 +107,7 @@ OnDisplaySettingsChanged(object? sender, EventArgs e)
 {
     await System.Threading.Tasks.Task.Delay(200);
     WriteDetailLog(
-        "DisplayChange",
+        ELogEventType.DisplayChanged, "DisplayChange",
         "【イベント検知】画面構成または解像度の変更が発生しました"
     );
 }
@@ -118,15 +119,18 @@ OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
       switch ( e.Mode ) {
       case  PowerModes.Suspend:
           WriteDetailLog(
-              "Suspend", "システムがスリープ/休止状態に移行します。");
+              ELogEventType.PowerSuspend, "Suspend",
+              "システムがスリープ/休止状態に移行します。");
           break;
       case  PowerModes.Resume:
           WriteDetailLog(
-              "Resume", "システムがスリープ/休止状態から復帰しました。");
+              ELogEventType.PowerResume, "Resume",
+              "システムがスリープ/休止状態から復帰しました。");
           break;
       case  PowerModes.StatusChange:
           WriteDetailLog(
-              "PowerStatus", "電源ステータスが変更されました。");
+              ELogEventType.PowerStatusChange, "PowerStatus",
+              "電源ステータスが変更されました。");
           break;
       }
 }
