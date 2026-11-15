@@ -95,7 +95,7 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
     }
 
     WriteDetailLog(
-        ELogEventType.ProgramStarted, "Start",
+        ELogEventType.ProgramStarted, "ProgramStart",
         "【プログラム起動】現在のディスプレイ構成");
     SystemEvents.PowerModeChanged       += OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
