@@ -54,15 +54,8 @@ public  MainWindow()
     this.DataContext = this.m_viewModel;
 
     //  テストデータ  //
-    var Items = new ObservableCollection<LogEntry>();
-    Items.Add(new LogEntry {
-        EventDateTime = DateTime.Now,
-        EventKind = ELogEventType.DisplayChanged,
-        EventTitle = "Change Resolution",
-        ScreenHeight = 1080,
-        ScreenWidth = 1960
-    });
-    lvwEvent.ItemsSource = Items;
+    this.m_logItems = new ObservableCollection<LogEntry>();
+    lvwEvent.ItemsSource = this.m_logItems;
 }
 
 
@@ -207,6 +200,7 @@ private   static  readonly  string  LogFilePath =
 private   readonly  MonitorService      m_srvMonitor;
 private   Models.SampleModel            m_taskModel;
 private   ViewModels.SampleViewModel    m_viewModel;
+private   ObservableCollection<LogEntry>    m_logItems;
 
 
 }   //  End class  MainWindow
