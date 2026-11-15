@@ -45,7 +45,7 @@
               <GridViewColumn.DisplayMemberBinding>
                 <Binding
                   Path="EventDateTime"
-                  StringFormat="{}{0:yyyy/MM/dd HH:mm:ss.fff}"
+                  StringFormat="{}{0:yyyy/MM/dd HH:mm:ss}"
                 />
               </GridViewColumn.DisplayMemberBinding>
             </GridViewColumn>
