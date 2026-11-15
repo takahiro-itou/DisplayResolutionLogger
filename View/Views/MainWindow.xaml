@@ -60,6 +60,12 @@
               Header="Resolution"
               Width="Auto"
             >
+              <GridViewColumn.DisplayMemberBinding>
+                <MultiBinding StringFormat="{}{0}x{1}">
+                  <Binding Path="ScreenWidth" />
+                  <Binding Path="ScreenHeight" />
+                </MultiBinding>
+              </GridViewColumn.DisplayMemberBinding>
             </GridViewColumn>
 
           </GridView>
