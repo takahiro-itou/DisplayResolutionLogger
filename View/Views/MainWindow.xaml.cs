@@ -54,13 +54,8 @@ public  MainWindow()
     this.DataContext = this.m_viewModel;
 
     //  テストデータ  //
-    var Items = new ObservableCollection<LogEntry>();
-    Items.Add(new LogEntry {
-        EventDateTime = DateTime.Now,
-        EventKind = ELogEventType.DisplayChanged,
-        EventTitle = "Change Resolution"
-    });
-    lvwEvent.ItemsSource = Items;
+    this.m_logItems = new ObservableCollection<LogEntry>();
+    lvwEvent.ItemsSource = this.m_logItems;
 }
 
 
@@ -99,7 +94,9 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
         }
     }
 
-    WriteDetailLog("【プログラム起動】現在のディスプレイ構成");
+    WriteDetailLog(
+        ELogEventType.ProgramStarted, "ProgramStart",
+        "【プログラム起動】現在のディスプレイ構成");
     SystemEvents.PowerModeChanged       += OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
 }
@@ -109,7 +106,10 @@ private  async  void
 OnDisplaySettingsChanged(object? sender, EventArgs e)
 {
     await System.Threading.Tasks.Task.Delay(200);
-    WriteDetailLog("【イベント検知】画面構成または解像度の変更が発生しました");
+    WriteDetailLog(
+        ELogEventType.DisplayChanged, "DisplayChange",
+        "【イベント検知】画面構成または解像度の変更が発生しました"
+    );
 }
 
 
@@ -118,13 +118,19 @@ OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
 {
       switch ( e.Mode ) {
       case  PowerModes.Suspend:
-          WriteDetailLog("システムがスリープ/休止状態に移行します。");
+          WriteDetailLog(
+              ELogEventType.PowerSuspend, "Suspend",
+              "システムがスリープ/休止状態に移行します。");
           break;
       case  PowerModes.Resume:
-          WriteDetailLog("システムがスリープ/休止状態から復帰しました。");
+          WriteDetailLog(
+              ELogEventType.PowerResume, "Resume",
+              "システムがスリープ/休止状態から復帰しました。");
           break;
       case  PowerModes.StatusChange:
-          WriteDetailLog("電源ステータスが変更されました。");
+          WriteDetailLog(
+              ELogEventType.PowerStatusChange, "PowerStatus",
+              "電源ステータスが変更されました。");
           break;
       }
 }
@@ -141,12 +147,19 @@ OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
 **/
 private  void
 WriteDetailLog(
-        System.String   eventTitle)
+        ELogEventType   eventKind,
+        System.String   eventTitle,
+        System.String   localTitle)
 {
+    int sW  = 0;
+    int sH  = 0;
+
     try {
         var sb = new System.Text.StringBuilder();
+        DateTime curTime = DateTime.Now;
         sb.AppendLine("==================================================");
-        sb.AppendLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {eventTitle}");
+        sb.AppendLine($"[{curTime:yyyy-MM-dd HH:mm:ss.fff}] {eventTitle}");
+        sb.AppendLine($"{localTitle}");
         sb.AppendLine("==================================================");
 
         // 全モニター数の取得
@@ -163,10 +176,13 @@ WriteDetailLog(
         for (int i = 0; i < allScreens.Length; i++)
         {
             var scr = allScreens[i];
+            sW  = scr.Bounds.Width;
+            sH  = scr.Bounds.Height;
+
             sb.AppendLine($"--- モニター [{i}] --------------------");
             sb.AppendLine($"  ・デバイス名  : {scr.DeviceName}");
             sb.AppendLine($"  ・メイン画面  : {(scr.Primary ? "はい (Primary)" : "いいえ")}");
-            sb.AppendLine($"  ・解像度(全体): {scr.Bounds.Width} x {scr.Bounds.Height}");
+            sb.AppendLine($"  ・解像度(全体): {sW} x {sH}");
             sb.AppendLine($"  ・配置座標    : X={scr.Bounds.X}, Y={scr.Bounds.Y}");
             sb.AppendLine($"  ・作業領域    : {scr.WorkingArea.Width} x {scr.WorkingArea.Height} (タスクバー等を除く)");
 
@@ -182,6 +198,14 @@ WriteDetailLog(
         sb.AppendLine("--------------------------------------------------");
         sb.AppendLine($"システムDPIの目安: {dpi} DPI");
         sb.AppendLine(); // 空行
+
+        this.m_logItems.Add(new LogEntry {
+            EventDateTime = curTime,
+            EventKind = eventKind,
+            EventTitle = eventTitle,
+            ScreenHeight = sH,
+            ScreenWidth = sW
+        });
 
         // ファイルに追記
         System.IO.File.AppendAllText(
@@ -205,6 +229,7 @@ private   static  readonly  string  LogFilePath =
 private   readonly  MonitorService      m_srvMonitor;
 private   Models.SampleModel            m_taskModel;
 private   ViewModels.SampleViewModel    m_viewModel;
+private   ObservableCollection<LogEntry>    m_logItems;
 
 
 }   //  End class  MainWindow
