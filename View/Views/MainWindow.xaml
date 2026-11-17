@@ -45,7 +45,7 @@
               <GridViewColumn.DisplayMemberBinding>
                 <Binding
                   Path="EventDateTime"
-                  StringFormat="{}{0:yyyy/MM/dd HH:mm:ss.fff}"
+                  StringFormat="{}{0:yyyy/MM/dd HH:mm:ss}"
                 />
               </GridViewColumn.DisplayMemberBinding>
             </GridViewColumn>
@@ -55,6 +55,18 @@
               Header="Title"
               Width="Auto"
             />
+
+            <GridViewColumn
+              Header="Resolution"
+              Width="Auto"
+            >
+              <GridViewColumn.DisplayMemberBinding>
+                <MultiBinding StringFormat="{}{0}x{1}">
+                  <Binding Path="ScreenWidth" />
+                  <Binding Path="ScreenHeight" />
+                </MultiBinding>
+              </GridViewColumn.DisplayMemberBinding>
+            </GridViewColumn>
 
           </GridView>
         </ListView.View>

@@ -19,6 +19,7 @@ namespace  MonitorLogger.Models  {
 
 public  enum  ELogEventType
 {
+    ProgramStarted,
     PowerSuspend,
     PowerResume,
     PowerStatusChange,
