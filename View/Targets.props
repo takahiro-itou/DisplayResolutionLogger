@@ -14,7 +14,9 @@
     <Compile Include="Services\MonitorService.cs" />
     <Compile Include="Services\Win32API.cs" />
 
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SampleViewModel.cs" />
+
     <Compile Include="Views\MainWindow.xaml.cs" />
   </ItemGroup>
 
