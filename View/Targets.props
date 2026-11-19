@@ -10,6 +10,7 @@
 
     <Compile Include="Models\LogEntry.cs" />
 
+    <Compile Include="Services\LogStorageService.cs" />
     <Compile Include="Services\MonitorService.cs" />
     <Compile Include="Services\Win32API.cs" />
 
