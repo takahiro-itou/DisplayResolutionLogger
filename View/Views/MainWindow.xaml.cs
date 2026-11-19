@@ -48,10 +48,10 @@ public  MainWindow()
     this.Loaded += MainWindow_Loaded;
 
     this.m_srvMonitor = new Services.MonitorService();
-    this.m_taskModel  = new Models.SampleModel();
-    this.m_viewModel  = new ViewModels.SampleViewModel(this.m_taskModel);
+//    this.m_taskModel  = new Models.SampleModel();
+//    this.m_viewModel  = new ViewModels.SampleViewModel(this.m_taskModel);
 
-    this.DataContext = this.m_viewModel;
+//    this.DataContext = this.m_viewModel;
 
     //  テストデータ  //
     this.m_logItems = new ObservableCollection<LogEntry>();
@@ -226,9 +226,9 @@ private   static  readonly  string  LogFilePath =
         AppDomain.CurrentDomain.BaseDirectory,
         "Resolution.log");
 
-private   readonly  MonitorService      m_srvMonitor;
-private   Models.SampleModel            m_taskModel;
-private   ViewModels.SampleViewModel    m_viewModel;
+private   readonly  MonitorService          m_srvMonitor;
+//  private   Models.SampleModel            m_taskModel;
+//  private   ViewModels.SampleViewModel    m_viewModel;
 private   ObservableCollection<LogEntry>    m_logItems;
 
 
