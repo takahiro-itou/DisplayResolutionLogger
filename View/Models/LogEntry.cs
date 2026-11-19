@@ -59,6 +59,13 @@ public  LogEntry()
 /**
 **
 **/
+public  System.String
+DisplayName { get; set; }
+
+//----------------------------------------------------------------
+/**
+**
+**/
 public  DateTime
 EventDateTime { get; set; }
 
