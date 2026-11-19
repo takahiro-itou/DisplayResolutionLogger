@@ -226,9 +226,9 @@ private   static  readonly  string  LogFilePath =
         AppDomain.CurrentDomain.BaseDirectory,
         "Resolution.log");
 
-private   readonly  MonitorService      m_srvMonitor;
-private   Models.SampleModel            m_taskModel;
-private   ViewModels.SampleViewModel    m_viewModel;
+private   readonly  MonitorService          m_srvMonitor;
+//  private   Models.SampleModel            m_taskModel;
+//  private   ViewModels.SampleViewModel    m_viewModel;
 private   ObservableCollection<LogEntry>    m_logItems;
 
 
