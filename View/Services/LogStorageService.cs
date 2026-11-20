@@ -13,7 +13,10 @@
 *************************************************************************/
 
 using   System;
+using   System.Collections.Generic;
 using   System.Runtime.Serialization.Json;
+
+using   MonitorLogger.Models;
 
 
 namespace  MonitorLogger.Services  {
