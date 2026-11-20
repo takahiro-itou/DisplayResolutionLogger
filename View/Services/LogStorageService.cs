@@ -52,6 +52,21 @@ LogStorageService(
 //    Public Member Functions.
 //
 
+public  void
+SaveLogs(
+        IEnumerable<LogEntry>   logs)
+{
+    var list = new List<LogEntry>(logs);
+    var serializer = new DataContractJsonSerializer(
+            typeof(List<LogEntry>), this.m_settings);
+    using (var stream = new FileStream(
+            this._filePath, FileMode.Create,
+            FileAccess.Write, FileShare.None))
+    {
+        serializer.WriteObject(stream, list);
+    }
+}
+
 
 //========================================================================
 //
