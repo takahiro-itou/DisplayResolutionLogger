@@ -43,7 +43,8 @@ public
 LogStorageService(
         System.String   fileName = "Logs.json")
 {
-    this.m_filePath = fileName;
+    this.m_filePath = System.IO.Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, fileName);
     this.m_settings = new DataContractJsonSerializerSettings
     {
         DateTimeFormat = new System.Runtime.Serialization.DateTimeFormat("o")
