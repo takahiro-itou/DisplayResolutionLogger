@@ -48,6 +48,7 @@ public  MainWindow()
     this.Loaded += MainWindow_Loaded;
 
     this.m_srvMonitor = new Services.MonitorService();
+    this.m_srvStorage = new Services.LogStorageService();
 //    this.m_taskModel  = new Models.SampleModel();
 //    this.m_viewModel  = new ViewModels.SampleViewModel(this.m_taskModel);
 
@@ -55,6 +56,10 @@ public  MainWindow()
 
     //  テストデータ  //
     this.m_logItems = new ObservableCollection<LogEntry>();
+    this.m_logItems.CollectionChaged += (s, e) =>
+    {
+        this.m_srvStorage.SaveLogs(this.m_logItems);
+    }
     lvwEvent.ItemsSource = this.m_logItems;
 }
 
@@ -226,7 +231,9 @@ private   static  readonly  string  LogFilePath =
         AppDomain.CurrentDomain.BaseDirectory,
         "Resolution.log");
 
+private   readonlu  LogStorageService       m_srvStorage;
 private   readonly  MonitorService          m_srvMonitor;
+
 //  private   Models.SampleModel            m_taskModel;
 //  private   ViewModels.SampleViewModel    m_viewModel;
 private   ObservableCollection<LogEntry>    m_logItems;
