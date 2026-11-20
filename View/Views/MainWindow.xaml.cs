@@ -56,7 +56,7 @@ public  MainWindow()
 
     //  テストデータ  //
     this.m_logItems = new ObservableCollection<LogEntry>();
-    this.m_logItems.CollectionChaged += (s, e) =>
+    this.m_logItems.CollectionChanged += (s, e) =>
     {
         this.m_srvStorage.SaveLogs(this.m_logItems);
     };
