@@ -13,6 +13,7 @@
 *************************************************************************/
 
 using   System;
+using   System.Runtime.Serialization.Json;
 
 
 namespace  MonitorLogger.Services  {
@@ -39,10 +40,9 @@ LogStorageService(
         System.String   fileName = "Logs.json")
 {
     this.m_filePath = fileName;
-    this.m_jsOption = new JsonSerializerOptions
+    this.m_settings = new DataContractJsonSerializerSettings
     {
-        WriteIndented = true,
-        Converters = { new JsonStringEnumConverter() }
+        DateTimeFormat = new System.Runtime.Serialization.DateTimeFormat("o")
     };
 }
 
@@ -59,7 +59,8 @@ LogStorageService(
 //
 
 private   readonly  System.String           m_filePath;
-private   readonly  JsonSerializerOptions   m_jsOption;
+private   readonly  DataContractJsonSerializerSettings  m_settings;
+
 
 }   //  End class  LogStorageService
 
