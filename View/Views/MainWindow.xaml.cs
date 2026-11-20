@@ -59,7 +59,7 @@ public  MainWindow()
     this.m_logItems.CollectionChaged += (s, e) =>
     {
         this.m_srvStorage.SaveLogs(this.m_logItems);
-    }
+    };
     lvwEvent.ItemsSource = this.m_logItems;
 }
 
@@ -231,7 +231,7 @@ private   static  readonly  string  LogFilePath =
         AppDomain.CurrentDomain.BaseDirectory,
         "Resolution.log");
 
-private   readonlu  LogStorageService       m_srvStorage;
+private   readonly  LogStorageService       m_srvStorage;
 private   readonly  MonitorService          m_srvMonitor;
 
 //  private   Models.SampleModel            m_taskModel;
