@@ -25,6 +25,41 @@ namespace  MonitorLogger.Services  {
 public  class  LogStorageService
 {
 
+//========================================================================
+//
+//    Constructor(s) and Destructor.
+//
+
+//----------------------------------------------------------------
+/**   コンストラクタ。
+**
+**/
+public
+LogStorageService(
+        System.String   fileName = "Logs.json")
+{
+    this.m_filePath = fileName;
+    this.m_jsOption = new JsonSerializerOptions
+    {
+        WriteIndented = true,
+        Converters = { new JsonStringEnumConverter() }
+    };
+}
+
+
+//========================================================================
+//
+//    Public Member Functions.
+//
+
+
+//========================================================================
+//
+//    Member Variables.
+//
+
+private   readonly  System.String           m_filePath;
+private   readonly  JsonSerializerOptions   m_jsOption;
 
 }   //  End class  LogStorageService
 
