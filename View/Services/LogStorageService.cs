@@ -14,6 +14,7 @@
 
 using   System;
 using   System.Collections.Generic;
+using   System.IO;
 using   System.Runtime.Serialization.Json;
 
 using   MonitorLogger.Models;
@@ -63,9 +64,9 @@ SaveLogs(
     var serializer = new DataContractJsonSerializer(
             typeof(List<LogEntry>), this.m_settings);
     using (var stream = new FileStream(
-            this._filePath, FileMode.Create,
-            FileAccess.Write, FileShare.None))
-    {
+            this.m_filePath, FileMode.Create,
+            FileAccess.Write, FileShare.None)
+    ) {
         serializer.WriteObject(stream, list);
     }
 }
