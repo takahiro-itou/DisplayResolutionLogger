@@ -74,7 +74,8 @@ CloseLogger()
 
     WriteDetailLog(
         ELogEventType.ProgramExit, "ProgramExit",
-        "【プログラム終了】現在のディスプレイ構成");
+        "【プログラム終了】現在のディスプレイ構成",
+        true);
 
     SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
@@ -106,7 +107,8 @@ StartLogger()
 
     WriteDetailLog(
         ELogEventType.ProgramStart, "ProgramStart",
-        "【プログラム起動】現在のディスプレイ構成");
+        "【プログラム起動】現在のディスプレイ構成",
+        true);
 
     SystemEvents.PowerModeChanged       += OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
@@ -124,7 +126,8 @@ public  void
 WriteDetailLog(
         ELogEventType   eventKind,
         System.String   eventTitle,
-        System.String   localTitle)
+        System.String   localTitle,
+        System.Boolean  flagSave = true)
 {
     int sW  = 0;
     int sH  = 0;
@@ -184,6 +187,10 @@ WriteDetailLog(
             ScreenWidth = sW
         });
 
+        if ( flagSave ) {
+            this.m_srvStorage.SaveLogs(this.m_logItems);
+        }
+
         // ファイルに追記
         System.IO.File.AppendAllText(
             LogFilePath, sb.ToString(), System.Text.Encoding.UTF8);
@@ -220,7 +227,8 @@ OnDisplaySettingsChanged(object? sender, EventArgs e)
     await System.Threading.Tasks.Task.Delay(200);
     WriteDetailLog(
         ELogEventType.DisplayChange, "DisplayChange",
-        "【イベント検知】画面構成または解像度の変更が発生しました"
+        "【イベント検知】画面構成または解像度の変更が発生しました",
+        true
     );
 }
 
@@ -236,17 +244,20 @@ OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
     case  PowerModes.Suspend:
         WriteDetailLog(
             ELogEventType.PowerSuspend, "Suspend",
-            "システムがスリープ/休止状態に移行します。");
+            "システムがスリープ/休止状態に移行します。",
+            false);
         break;
     case  PowerModes.Resume:
         WriteDetailLog(
             ELogEventType.PowerResume, "Resume",
-            "システムがスリープ/休止状態から復帰しました。");
+            "システムがスリープ/休止状態から復帰しました。",
+            true);
         break;
     case  PowerModes.StatusChange:
         WriteDetailLog(
             ELogEventType.PowerChange, "PowerStatus",
-            "電源ステータスが変更されました。");
+            "電源ステータスが変更されました。",
+            true);
         break;
     }
 }
