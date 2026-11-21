@@ -12,7 +12,7 @@
 **                                                                      **
 *************************************************************************/
 
-using   BaseballScoreHelper.ViewModels;
+using   MonitorLogger.ViewModels;
 
 
 namespace  MonitorLogger.Services  {
