@@ -70,7 +70,7 @@ OnStartup(StartupEventArgs e)
 //    Member Variables.
 //
 
-private   readonly  MainViewModel   m_vmMain;
+private             MainViewModel   m_vmMain;
 
 
 }   //  End class  App
