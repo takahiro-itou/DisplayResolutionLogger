@@ -12,6 +12,7 @@
 **                                                                      **
 *************************************************************************/
 
+using   Microsoft.Win32;
 using   System;
 using   System.Collections.ObjectModel;
 

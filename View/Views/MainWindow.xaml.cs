@@ -12,13 +12,10 @@
 **                                                                      **
 *************************************************************************/
 
-using   Microsoft.Win32;
 using   System;
 using   System.Windows;
 using   System.Windows.Media.Imaging;
 
-using   MonitorLogger.Models;
-using   MonitorLogger.Services;
 using   MonitorLogger.ViewModels;
 
 
@@ -152,14 +149,7 @@ WriteDetailLog(
 //    Member Variables.
 //
 
-private   static  readonly  string  LogFilePath =
-    System.IO.Path.Combine(
-        AppDomain.CurrentDomain.BaseDirectory,
-        "Resolution.log");
-
 private   readonly  MainViewModel           m_viewModel;
-private   readonly  LogStorageService       m_srvStorage;
-private   readonly  MonitorService          m_srvMonitor;
 
 
 }   //  End class  MainWindow
