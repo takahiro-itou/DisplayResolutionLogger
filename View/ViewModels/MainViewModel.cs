@@ -53,8 +53,11 @@ MainViewModel(
     this.m_logItems = this.m_srvStorage.LoadLogs();
     this.m_logItems.CollectionChanged += (s, e) =>
     {
-        this.m_srvStorage.SaveLogs(this.m_logItems);
+
     };
+
+    this.m_isSaved  = false;
+    this.m_isEnable = false;
 }
 
 
@@ -64,24 +67,52 @@ MainViewModel(
 /**
 **
 **/
+public  void
 CloseLogger()
 {
+    if ( ! this.m_isEnable ) { return; }
+
+    WriteDetailLog(
+        ELogEventType.ProgramExit, "ProgramExit",
+        "【プログラム終了】現在のディスプレイ構成");
+
     SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
+
+    this.m_isEnable = false;
 }
 
 //----------------------------------------------------------------
 /**
 **
 **/
+public  void
+SaveLogs()
+{
+    if ( this.m_isSaved || ! this.m_isEnable ) { return; }
+
+    this.m_srvStorage.SaveLogs(this.m_logItems);
+    this.m_isSaved  = true;
+}
+
+//----------------------------------------------------------------
+/**
+**
+**/
+public  void
 StartLogger()
 {
+    if ( this.m_isEnable ) { return; }
+
     WriteDetailLog(
         ELogEventType.ProgramStarted, "ProgramStart",
         "【プログラム起動】現在のディスプレイ構成");
 
     SystemEvents.PowerModeChanged       += OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
+
+    this.m_isSaved  = false;
+    this.m_isEnable = true;
 }
 
 
@@ -136,7 +167,9 @@ WriteDetailLog(
         }
 
         // RegistryからDPIの目安を取得 (C# 8.0の switch 式を活用)
-        var registryValue = Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "AppliedDPI", 96);
+        var registryValue = Registry.GetValue(
+                @"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics",
+                "AppliedDPI", 96);
         int dpi = registryValue is int val ? val : 96;
 
         sb.AppendLine("--------------------------------------------------");
@@ -160,7 +193,6 @@ WriteDetailLog(
 }
 
 
-
 //========================================================================
 
 //----------------------------------------------------------------
@@ -177,7 +209,6 @@ public  LogEntriesList  LogItems
 //
 //    For Internal Use Only.
 //
-
 
 //----------------------------------------------------------------
 /**
@@ -235,6 +266,9 @@ private   readonly  LogStorageService   m_srvStorage;
 private   readonly  MonitorService      m_srvMonitor;
 
 private             LogEntriesList      m_logItems;
+
+private             System.Boolean      m_isSaved;
+private             System.Boolean      m_isEnable;
 
 
 }   //  End class  MainViewModel
