@@ -10,9 +10,11 @@
 
     <Compile Include="Models\LogEntry.cs" />
 
+    <Compile Include="Services\IWindowService.cs" />
     <Compile Include="Services\LogStorageService.cs" />
     <Compile Include="Services\MonitorService.cs" />
     <Compile Include="Services\Win32API.cs" />
+    <Compile Include="Services\WindowService.cs" />
 
     <Compile Include="ViewModels\MainViewModel.cs" />
 
