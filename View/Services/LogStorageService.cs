@@ -57,6 +57,38 @@ LogStorageService(
 //    Public Member Functions.
 //
 
+//----------------------------------------------------------------
+/**
+**
+**/
+public  ObservableCollection<LogEntry>
+LoadLogs()
+{
+    if ( ! File.Exists(this.m_filePath) ) {
+        return  new ObservableCollection<LogEntry>();
+    }
+
+    try {
+        var serializer = new DataContractJsonSerializerSettings(
+                typeof(List<LogEntry>), this.m_settings);
+        using ( var stream = new FileStream(
+                this.m_filePath, FileMode.Open,
+                FileAccess.Read, FileShare.Read)
+        ) {
+            var list serializer.ReadObject(stream) as List<LogEntry>;
+            return  list != null
+                ? new ObservableCollection<LogEntry>(list)
+                : new ObservableCollection<LogEntry>();
+        }
+    } catch {
+        return  new ObservableCollection<LogEntry>());
+    }
+}
+
+//----------------------------------------------------------------
+/**
+**
+**/
 public  void
 SaveLogs(
         IEnumerable<LogEntry>   logs)
