@@ -11,3 +11,36 @@
 **          or (at your option) any later version.                      **
 **                                                                      **
 *************************************************************************/
+
+using   System.Windows;
+
+using   MonitorLogger.Models;
+using   MonitorLogger.Services;
+using   MonitorLogger.ViewModels;
+using   MonitorLogger.Views;
+
+
+namespace  MonitorLogger  {
+
+public  partial  class  App : Application
+{
+
+//----------------------------------------------------------------
+/**
+**
+**/
+protected  override  void
+OnStartup(StartupEventArgs e)
+{
+    base.OnStartup(e);
+
+//    var storage = new LogStorageService();
+//    var vmMain  = new MainViewModel();
+    var mainWindow = new MainWindow();
+
+    mainWindow.Show();
+}
+
+}   //  End class  App
+
+}   //  End of namespace  MonitorLogger
