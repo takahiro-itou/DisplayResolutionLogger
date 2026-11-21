@@ -47,8 +47,10 @@ MainWindow(
 {
     InitializeComponent();
 
-    this.Loaded += MainWindow_Loaded;
+    this.m_viewModel     = viewModel;
     lvwEvent.ItemsSource = viewModel.LogItems;
+
+    this.Loaded += MainWindow_Loaded;
 }
 
 
@@ -62,6 +64,7 @@ OnClosed(EventArgs e)
 {
     SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
+
     base.OnClosed(e);
 }
 
@@ -135,6 +138,15 @@ OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
 //    For Internal Use Only.
 //
 
+private  void
+WriteDetailLog(
+        ELogEventType   eventKind,
+        System.String   eventTitle,
+        System.String   localTitle)
+{
+    this.m_viewModel?.WriteDetailLog(eventKind, eventTitle, localTitle);
+}
+
 //========================================================================
 //
 //    Member Variables.
@@ -145,12 +157,9 @@ private   static  readonly  string  LogFilePath =
         AppDomain.CurrentDomain.BaseDirectory,
         "Resolution.log");
 
+private   readonly  MainViewModel           m_viewModel;
 private   readonly  LogStorageService       m_srvStorage;
 private   readonly  MonitorService          m_srvMonitor;
-
-//  private   Models.SampleModel            m_taskModel;
-//  private   ViewModels.SampleViewModel    m_viewModel;
-
 
 
 }   //  End class  MainWindow
