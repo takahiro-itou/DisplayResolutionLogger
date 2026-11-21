@@ -14,6 +14,8 @@
 
 using   System;
 
+using   MonitorLogger.Services;
+
 
 namespace  MonitorLogger.ViewModels  {
 
@@ -24,6 +26,30 @@ namespace  MonitorLogger.ViewModels  {
 
 public  class  MainViewModel
 {
+
+//========================================================================
+//
+//    Constructor(s) and Destructor.
+//
+
+//----------------------------------------------------------------
+/**
+**
+**/
+public
+MainViewModel(
+        LogStorageService   srvLogStorage)
+{
+    m_srvLogStorage = srvLogStorage;
+}
+
+
+//========================================================================
+//
+//    Member Variables.
+//
+
+private   readonly  LogStorageService   m_srvLogStorage;
 
 
 }   //  End class  MainViewModel

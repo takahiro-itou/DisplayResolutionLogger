@@ -34,11 +34,11 @@ OnStartup(StartupEventArgs e)
 {
     base.OnStartup(e);
 
-    WindowService   wndSrv = new WindowService();
-//    var storage = new LogStorageService();
-    var vmMain  = new MainViewModel();
+    WindowService       wndSrv  = new WindowService();
+    LogStorageService   storage = new LogStorageService();
 
     //  メインウィンドウを表示する。    //
+    var vmMain  = new MainViewModel(storage);
     wndSrv.showMainWindow(vmMain);
 }
 
