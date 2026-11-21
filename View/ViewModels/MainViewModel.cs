@@ -169,6 +169,19 @@ WriteDetailLog(
             sb.AppendLine($"  ・モニター製品名: {friendlyName}");
         }
 
+        this.m_logItems.Add(new LogEntry {
+            DisplayName   = friendlyName,
+            EventDateTime = curTime,
+            EventKind     = eventKind,
+            EventTitle    = eventTitle,
+            ScreenHeight  = sH,
+            ScreenWidth   = sW
+        });
+
+        if ( flagSave ) {
+            this.m_srvStorage.SaveLogs(this.m_logItems);
+        }
+
         // RegistryからDPIの目安を取得 (C# 8.0の switch 式を活用)
         var registryValue = Registry.GetValue(
                 @"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics",
@@ -179,19 +192,7 @@ WriteDetailLog(
         sb.AppendLine($"システムDPIの目安: {dpi} DPI");
         sb.AppendLine(); // 空行
 
-        this.m_logItems.Add(new LogEntry {
-            EventDateTime = curTime,
-            EventKind = eventKind,
-            EventTitle = eventTitle,
-            ScreenHeight = sH,
-            ScreenWidth = sW
-        });
-
-        if ( flagSave ) {
-            this.m_srvStorage.SaveLogs(this.m_logItems);
-        }
-
-        // ファイルに追記
+        //  ファイルに追記。    //
         System.IO.File.AppendAllText(
             LogFilePath, sb.ToString(), System.Text.Encoding.UTF8);
     } catch (Exception ex) {
