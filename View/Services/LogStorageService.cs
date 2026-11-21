@@ -81,7 +81,7 @@ LoadLogs()
                 : new ObservableCollection<LogEntry>();
         }
     } catch {
-        return  new ObservableCollection<LogEntry>());
+        return  new ObservableCollection<LogEntry>();
     }
 }
 
