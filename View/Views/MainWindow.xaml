@@ -69,8 +69,8 @@
             </GridViewColumn>
 
             <GridViewColumn
-              DisplayMemberBinding="{Binding DisplayName}"
-              Header="DisplayName"
+              DisplayMemberBinding="{Binding MonitorName}"
+              Header="MonitorName"
               Width="Auto"
             />
 

@@ -47,8 +47,8 @@ public  class  LogEntry
 **/
 public  LogEntry()
 {
-    this.DisplayName = "";
     this.EventTitle  = "";
+    this.MonitorName = "";
 }
 
 
@@ -56,13 +56,6 @@ public  LogEntry()
 //
 //    Public Properties.
 //
-
-//----------------------------------------------------------------
-/**
-**
-**/
-public  System.String
-DisplayName { get; set; }
 
 //----------------------------------------------------------------
 /**
@@ -84,6 +77,13 @@ EventKind { get; set; }
 **/
 public  System.String
 EventTitle { get; set; }
+
+//----------------------------------------------------------------
+/**
+**
+**/
+public  System.String
+MonitorName { get; set; }
 
 //----------------------------------------------------------------
 /**

@@ -131,6 +131,7 @@ WriteDetailLog(
 {
     int sW  = 0;
     int sH  = 0;
+    System.String   monitorName = "?";
 
     try {
         var sb = new System.Text.StringBuilder();
@@ -164,13 +165,13 @@ WriteDetailLog(
             sb.AppendLine($"  ・配置座標    : X={scr.Bounds.X}, Y={scr.Bounds.Y}");
             sb.AppendLine($"  ・作業領域    : {scr.WorkingArea.Width} x {scr.WorkingArea.Height} (タスクバー等を除く)");
 
-            string  friendlyName = this.m_srvMonitor.FindMonitorFriendlyNames(
+            monitorName = this.m_srvMonitor.FindMonitorFriendlyNames(
                     scr.DeviceName);
-            sb.AppendLine($"  ・モニター製品名: {friendlyName}");
+            sb.AppendLine($"  ・モニター製品名: {monitorName}");
         }
 
         this.m_logItems.Add(new LogEntry {
-            DisplayName   = friendlyName,
+            MonitorName   = monitorName,
             EventDateTime = curTime,
             EventKind     = eventKind,
             EventTitle    = eventTitle,
