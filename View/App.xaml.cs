@@ -26,6 +26,28 @@ public  partial  class  App : Application
 {
 
 //----------------------------------------------------------------
+/**   通常のアプリ終了時。
+**
+**/
+protected  override  void
+OnExit(ExitEventArgs e)
+{
+    this.m_vmMain.SaveLogs();
+    base.OnExit(e);
+}
+
+//----------------------------------------------------------------
+/**   システムのシャットダウン・ログオフ時
+**
+**/
+protected  override  void
+OnSessionEnding(SessionEndingCancelEventArgs e)
+{
+    this.m_vmMain.SaveLogs();
+    base.OnSessionEnding(e);
+}
+
+//----------------------------------------------------------------
 /**
 **
 **/
@@ -38,9 +60,17 @@ OnStartup(StartupEventArgs e)
     LogStorageService   storage = new LogStorageService();
 
     //  メインウィンドウを表示する。    //
-    var vmMain  = new MainViewModel(storage);
-    wndSrv.showMainWindow(vmMain);
+    this.m_vmMain   = new MainViewModel(storage);
+    wndSrv.showMainWindow(this.m_vmMain);
 }
+
+
+//========================================================================
+//
+//    Member Variables.
+//
+
+private   readonly  MainViewModel   m_vmMain;
 
 
 }   //  End class  App
