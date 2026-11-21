@@ -15,10 +15,14 @@
 using   System;
 using   System.Collections.ObjectModel;
 
+using   MonitorLogger.Models;
 using   MonitorLogger.Services;
 
 
 namespace  MonitorLogger.ViewModels  {
+
+using   LogEntriesList  = ObservableCollection<LogEntry>;
+
 
 //========================================================================
 //
@@ -27,8 +31,6 @@ namespace  MonitorLogger.ViewModels  {
 
 public  class  MainViewModel
 {
-
-using   LogEntriesList  = ObservableCollection<LogEntry>;
 
 
 //========================================================================
@@ -45,7 +47,7 @@ MainViewModel(
         LogStorageService   srvLogStorage)
 {
     this.m_srvMonitor = new Services.MonitorService();
-    this.m_srvStorage = new srvLogStorage;
+    this.m_srvStorage = srvLogStorage;
 
     this.m_logItems = this.m_srvStorage.LoadLogs();
     this.m_logItems.CollectionChanged += (s, e) =>
@@ -53,6 +55,84 @@ MainViewModel(
         this.m_srvStorage.SaveLogs(this.m_logItems);
     };
 }
+
+
+//========================================================================
+
+//----------------------------------------------------------------
+/**
+**
+**/
+public  void
+WriteDetailLog(
+        ELogEventType   eventKind,
+        System.String   eventTitle,
+        System.String   localTitle)
+{
+    int sW  = 0;
+    int sH  = 0;
+
+    try {
+        var sb = new System.Text.StringBuilder();
+        DateTime curTime = DateTime.Now;
+        sb.AppendLine("==================================================");
+        sb.AppendLine($"[{curTime:yyyy-MM-dd HH:mm:ss.fff}] {eventTitle}");
+        sb.AppendLine($"{localTitle}");
+        sb.AppendLine("==================================================");
+
+        // 全モニター数の取得
+        sb.AppendLine("MonitorFriendlyNames:");
+        var friendlyNames = this.m_srvMonitor.GetMonitorFriendlyNames();
+        foreach ( string s in friendlyNames.Keys ) {
+            string value = friendlyNames[s];
+            sb.AppendLine($"Key = {s} Value = {value}");
+        }
+
+        var allScreens = System.Windows.Forms.Screen.AllScreens;
+        sb.AppendLine($"認識されているモニター数: {allScreens.Length}");
+
+        for (int i = 0; i < allScreens.Length; i++)
+        {
+            var scr = allScreens[i];
+            sW  = scr.Bounds.Width;
+            sH  = scr.Bounds.Height;
+
+            sb.AppendLine($"--- モニター [{i}] --------------------");
+            sb.AppendLine($"  ・デバイス名  : {scr.DeviceName}");
+            sb.AppendLine($"  ・メイン画面  : {(scr.Primary ? "はい (Primary)" : "いいえ")}");
+            sb.AppendLine($"  ・解像度(全体): {sW} x {sH}");
+            sb.AppendLine($"  ・配置座標    : X={scr.Bounds.X}, Y={scr.Bounds.Y}");
+            sb.AppendLine($"  ・作業領域    : {scr.WorkingArea.Width} x {scr.WorkingArea.Height} (タスクバー等を除く)");
+
+            string  friendlyName = this.m_srvMonitor.FindMonitorFriendlyNames(
+                    scr.DeviceName);
+            sb.AppendLine($"  ・モニター製品名: {friendlyName}");
+        }
+
+        // RegistryからDPIの目安を取得 (C# 8.0の switch 式を活用)
+        var registryValue = Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "AppliedDPI", 96);
+        int dpi = registryValue is int val ? val : 96;
+
+        sb.AppendLine("--------------------------------------------------");
+        sb.AppendLine($"システムDPIの目安: {dpi} DPI");
+        sb.AppendLine(); // 空行
+
+        this.m_logItems.Add(new LogEntry {
+            EventDateTime = curTime,
+            EventKind = eventKind,
+            EventTitle = eventTitle,
+            ScreenHeight = sH,
+            ScreenWidth = sW
+        });
+
+        // ファイルに追記
+        System.IO.File.AppendAllText(
+            LogFilePath, sb.ToString(), System.Text.Encoding.UTF8);
+    } catch (Exception ex) {
+        System.Diagnostics.Debug.WriteLine($"ログ出力エラー: {ex.Message}");
+    }
+}
+
 
 
 //========================================================================
@@ -69,11 +149,24 @@ public  LogEntriesList  LogItems
 
 //========================================================================
 //
+//    For Internal Use Only.
+//
+
+//========================================================================
+//
 //    Member Variables.
 //
 
+private   static  readonly  string  LogFilePath =
+    System.IO.Path.Combine(
+        AppDomain.CurrentDomain.BaseDirectory,
+        "Resolution.log");
+
 private   readonly  LogStorageService   m_srvStorage;
+private   readonly  MonitorService      m_srvMonitor;
+
 private             LogEntriesList      m_logItems;
+
 
 }   //  End class  MainViewModel
 
