@@ -14,12 +14,12 @@
 
 using   Microsoft.Win32;
 using   System;
-using   System.Collections.ObjectModel;
 using   System.Windows;
 using   System.Windows.Media.Imaging;
 
 using   MonitorLogger.Models;
 using   MonitorLogger.Services;
+using   MonitorLogger.ViewModels;
 
 
 namespace  MonitorLogger.Views  {
@@ -41,25 +41,14 @@ public  partial class  MainWindow : Window
 /**   デフォルトコンストラクタ。
 **
 **/
-public  MainWindow()
+public
+MainWindow(
+        MainViewModel   viewModel)
 {
     InitializeComponent();
 
     this.Loaded += MainWindow_Loaded;
-
-    this.m_srvMonitor = new Services.MonitorService();
-    this.m_srvStorage = new Services.LogStorageService();
-//    this.m_taskModel  = new Models.SampleModel();
-//    this.m_viewModel  = new ViewModels.SampleViewModel(this.m_taskModel);
-
-//    this.DataContext = this.m_viewModel;
-
-    this.m_logItems = this.m_srvStorage.LoadLogs();
-    this.m_logItems.CollectionChanged += (s, e) =>
-    {
-        this.m_srvStorage.SaveLogs(this.m_logItems);
-    };
-    lvwEvent.ItemsSource = this.m_logItems;
+    lvwEvent.ItemsSource = viewModel.LogItems;
 }
 
 
@@ -235,7 +224,7 @@ private   readonly  MonitorService          m_srvMonitor;
 
 //  private   Models.SampleModel            m_taskModel;
 //  private   ViewModels.SampleViewModel    m_viewModel;
-private   ObservableCollection<LogEntry>    m_logItems;
+
 
 
 }   //  End class  MainWindow

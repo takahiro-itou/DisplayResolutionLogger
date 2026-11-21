@@ -45,7 +45,7 @@ public  System.Boolean
 showMainWindow(
         MainViewModel   viewModel)
 {
-    MainWindow  frmMain = new MainWindow();
+    MainWindow  frmMain = new MainWindow(viewModel);
 
     frmMain.DataContext = viewModel;
     frmMain.Show();
