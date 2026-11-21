@@ -64,6 +64,31 @@ MainViewModel(
 /**
 **
 **/
+CloseLogger()
+{
+    SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
+    SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
+}
+
+//----------------------------------------------------------------
+/**
+**
+**/
+StartLogger()
+{
+    WriteDetailLog(
+        ELogEventType.ProgramStarted, "ProgramStart",
+        "【プログラム起動】現在のディスプレイ構成");
+
+    SystemEvents.PowerModeChanged       += OnPowerModeChanged;
+    SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
+}
+
+
+//----------------------------------------------------------------
+/**
+**
+**/
 public  void
 WriteDetailLog(
         ELogEventType   eventKind,
@@ -152,6 +177,49 @@ public  LogEntriesList  LogItems
 //
 //    For Internal Use Only.
 //
+
+
+//----------------------------------------------------------------
+/**
+**
+**/
+private  async  void
+OnDisplaySettingsChanged(object? sender, EventArgs e)
+{
+    await System.Threading.Tasks.Task.Delay(200);
+    WriteDetailLog(
+        ELogEventType.DisplayChanged, "DisplayChange",
+        "【イベント検知】画面構成または解像度の変更が発生しました"
+    );
+}
+
+
+//----------------------------------------------------------------
+/**
+**
+**/
+private  void
+OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
+{
+      switch ( e.Mode ) {
+      case  PowerModes.Suspend:
+          WriteDetailLog(
+              ELogEventType.PowerSuspend, "Suspend",
+              "システムがスリープ/休止状態に移行します。");
+          break;
+      case  PowerModes.Resume:
+          WriteDetailLog(
+              ELogEventType.PowerResume, "Resume",
+              "システムがスリープ/休止状態から復帰しました。");
+          break;
+      case  PowerModes.StatusChange:
+          WriteDetailLog(
+              ELogEventType.PowerStatusChange, "PowerStatus",
+              "電源ステータスが変更されました。");
+          break;
+      }
+}
+
 
 //========================================================================
 //

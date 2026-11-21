@@ -12,10 +12,13 @@
 **                                                                      **
 *************************************************************************/
 
+using   Microsoft.Win32;
 using   System;
 using   System.Windows;
 using   System.Windows.Media.Imaging;
 
+using   MonitorLogger.Models;
+using   MonitorLogger.Services;
 using   MonitorLogger.ViewModels;
 
 
@@ -59,10 +62,9 @@ MainWindow(
 protected  override  void
 OnClosed(EventArgs e)
 {
-    SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
-    SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
-
     base.OnClosed(e);
+
+    this.m_viewModel?.CloseLogger();
 }
 
 
@@ -87,46 +89,7 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
         }
     }
 
-    WriteDetailLog(
-        ELogEventType.ProgramStarted, "ProgramStart",
-        "【プログラム起動】現在のディスプレイ構成");
-
-    SystemEvents.PowerModeChanged       += OnPowerModeChanged;
-    SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
-}
-
-
-private  async  void
-OnDisplaySettingsChanged(object? sender, EventArgs e)
-{
-    await System.Threading.Tasks.Task.Delay(200);
-    WriteDetailLog(
-        ELogEventType.DisplayChanged, "DisplayChange",
-        "【イベント検知】画面構成または解像度の変更が発生しました"
-    );
-}
-
-
-private  void
-OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
-{
-      switch ( e.Mode ) {
-      case  PowerModes.Suspend:
-          WriteDetailLog(
-              ELogEventType.PowerSuspend, "Suspend",
-              "システムがスリープ/休止状態に移行します。");
-          break;
-      case  PowerModes.Resume:
-          WriteDetailLog(
-              ELogEventType.PowerResume, "Resume",
-              "システムがスリープ/休止状態から復帰しました。");
-          break;
-      case  PowerModes.StatusChange:
-          WriteDetailLog(
-              ELogEventType.PowerStatusChange, "PowerStatus",
-              "電源ステータスが変更されました。");
-          break;
-      }
+    this.m_viewModel?.StartLogger();
 }
 
 
