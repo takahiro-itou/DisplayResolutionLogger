@@ -34,12 +34,14 @@ OnStartup(StartupEventArgs e)
 {
     base.OnStartup(e);
 
+    WindowService   wndSrv = new WindowService();
 //    var storage = new LogStorageService();
-//    var vmMain  = new MainViewModel();
-    var mainWindow = new MainWindow();
+    var vmMain  = new MainViewModel();
 
-    mainWindow.Show();
+    //  メインウィンドウを表示する。    //
+    wndSrv.showMainWindow(vmMain);
 }
+
 
 }   //  End class  App
 
