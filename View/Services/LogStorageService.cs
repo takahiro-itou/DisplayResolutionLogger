@@ -75,7 +75,7 @@ LoadLogs()
                 this.m_filePath, FileMode.Open,
                 FileAccess.Read, FileShare.Read)
         ) {
-            var list serializer.ReadObject(stream) as List<LogEntry>;
+            var list = serializer.ReadObject(stream) as List<LogEntry>;
             return  list != null
                 ? new ObservableCollection<LogEntry>(list)
                 : new ObservableCollection<LogEntry>();
