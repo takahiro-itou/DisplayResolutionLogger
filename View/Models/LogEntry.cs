@@ -19,11 +19,12 @@ namespace  MonitorLogger.Models  {
 
 public  enum  ELogEventType
 {
-    ProgramStarted,
+    ProgramStart,
+    ProgramExit,
     PowerSuspend,
     PowerResume,
-    PowerStatusChange,
-    DisplayChanged
+    PowerChange,
+    DisplayChange
 }
 
 
@@ -46,8 +47,8 @@ public  class  LogEntry
 **/
 public  LogEntry()
 {
-    this.DisplayName = "";
     this.EventTitle  = "";
+    this.MonitorName = "";
 }
 
 
@@ -55,13 +56,6 @@ public  LogEntry()
 //
 //    Public Properties.
 //
-
-//----------------------------------------------------------------
-/**
-**
-**/
-public  System.String
-DisplayName { get; set; }
 
 //----------------------------------------------------------------
 /**
@@ -83,6 +77,13 @@ EventKind { get; set; }
 **/
 public  System.String
 EventTitle { get; set; }
+
+//----------------------------------------------------------------
+/**
+**
+**/
+public  System.String
+MonitorName { get; set; }
 
 //----------------------------------------------------------------
 /**

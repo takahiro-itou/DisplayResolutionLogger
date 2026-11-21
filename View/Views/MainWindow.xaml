@@ -68,6 +68,12 @@
               </GridViewColumn.DisplayMemberBinding>
             </GridViewColumn>
 
+            <GridViewColumn
+              DisplayMemberBinding="{Binding MonitorName}"
+              Header="MonitorName"
+              Width="Auto"
+            />
+
           </GridView>
         </ListView.View>
       </ListView>
