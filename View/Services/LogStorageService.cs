@@ -70,7 +70,7 @@ LoadLogs()
     }
 
     try {
-        var serializer = new DataContractJsonSerializerSettings(
+        var serializer = new DataContractJsonSerializer(
                 typeof(List<LogEntry>), this.m_settings);
         using ( var stream = new FileStream(
                 this.m_filePath, FileMode.Open,
