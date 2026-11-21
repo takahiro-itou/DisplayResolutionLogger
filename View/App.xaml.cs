@@ -32,7 +32,7 @@ public  partial  class  App : Application
 protected  override  void
 OnExit(ExitEventArgs e)
 {
-    this.m_vmMain.SaveLogs();
+    this.m_vmMain?.SaveLogs();
     base.OnExit(e);
 }
 
@@ -43,7 +43,7 @@ OnExit(ExitEventArgs e)
 protected  override  void
 OnSessionEnding(SessionEndingCancelEventArgs e)
 {
-    this.m_vmMain.SaveLogs();
+    this.m_vmMain?.SaveLogs();
     base.OnSessionEnding(e);
 }
 
@@ -70,7 +70,7 @@ OnStartup(StartupEventArgs e)
 //    Member Variables.
 //
 
-private             MainViewModel   m_vmMain;
+private             MainViewModel?  m_vmMain;
 
 
 }   //  End class  App
