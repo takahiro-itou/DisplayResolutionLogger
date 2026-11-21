@@ -17,5 +17,15 @@ using   System;
 
 namespace  MonitorLogger.ViewModels  {
 
+//========================================================================
+//
+//    MainViewModel  class
+//
+
+public  class  MainViewModel
+{
+
+
+}   //  End class  MainViewModel
 
 }   //  End of namespace  MonitorLogger.ViewModels
