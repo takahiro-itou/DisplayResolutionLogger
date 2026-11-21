@@ -13,6 +13,7 @@
 *************************************************************************/
 
 using   MonitorLogger.ViewModels;
+using   MonitorLogger.Views;
 
 
 namespace  MonitorLogger.Services  {
