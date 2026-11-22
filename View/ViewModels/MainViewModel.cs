@@ -118,6 +118,9 @@ SaveLogs()
 public  void
 StartLogger()
 {
+    this.m_isStart  = true;
+    this.m_isSaved  = false;
+
     WriteDetailLog(
         ELogEventType.ProgramStart, "ProgramStart",
         "【プログラム起動】現在のディスプレイ構成",
@@ -128,8 +131,6 @@ StartLogger()
     SystemEvents.PowerModeChanged       += OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
 
-    this.m_isStart  = true;
-    this.m_isSaved  = false;
     this.m_isEnable = true;
 }
 
@@ -187,13 +188,14 @@ WriteDetailLog(
         }
 
         this.m_logItems.Add(new LogEntry {
-            MonitorName   = monitorName,
-            EventDateTime = curTime,
-            EventKind     = eventKind,
-            EventTitle    = eventTitle,
-            ScreenHeight  = sH,
-            ScreenWidth   = sW
+            MonitorName     = monitorName,
+            EventDateTime   = curTime,
+            EventKind       = eventKind,
+            EventTitle      = eventTitle,
+            ScreenHeight    = sH,
+            ScreenWidth     = sW
         });
+        this.m_isSaved  = false;
 
         if ( flagSave ) {
             SaveLogs();
