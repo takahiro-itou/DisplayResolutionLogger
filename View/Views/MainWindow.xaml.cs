@@ -59,6 +59,7 @@ MainWindow(
 //    Protected Member Functions.
 //
 
+/*
 protected  override  void
 OnClosed(EventArgs e)
 {
@@ -66,7 +67,7 @@ OnClosed(EventArgs e)
 
     this.m_viewModel?.CloseLogger();
 }
-
+*/
 
 //========================================================================
 //
@@ -89,7 +90,7 @@ MainWindow_Loaded(object sender, RoutedEventArgs e)
         }
     }
 
-    this.m_viewModel?.StartLogger();
+//    this.m_viewModel?.StartLogger();
 }
 
 
