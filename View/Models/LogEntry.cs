@@ -24,7 +24,8 @@ public  enum  ELogEventType
     PowerSuspend,
     PowerResume,
     PowerChange,
-    DisplayChange
+    DisplayChange,
+    SessionEnding,
 }
 
 
