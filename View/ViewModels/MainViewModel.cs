@@ -15,6 +15,7 @@
 using   Microsoft.Win32;
 using   System;
 using   System.Collections.ObjectModel;
+using   System.Windows;
 
 using   MonitorLogger.Models;
 using   MonitorLogger.Services;
@@ -51,11 +52,8 @@ MainViewModel(
     this.m_srvStorage = srvLogStorage;
 
     this.m_logItems = this.m_srvStorage.LoadLogs();
-    this.m_logItems.CollectionChanged += (s, e) =>
-    {
 
-    };
-
+    this.m_isStart  = false;
     this.m_isSaved  = false;
     this.m_isEnable = false;
 }
@@ -70,18 +68,35 @@ MainViewModel(
 public  void
 CloseLogger()
 {
-    if ( ! this.m_isEnable ) { return; }
-
     WriteDetailLog(
         ELogEventType.ProgramExit, "ProgramExit",
-        "【プログラム終了】現在のディスプレイ構成",
+        "【プログラム終了】",
         true);
+
+    if ( ! this.m_isEnable ) { return; }
 
     SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
 
     this.m_isEnable = false;
 }
+
+public  void
+OnSessionEnding(SessionEndingCancelEventArgs e)
+{
+    WriteDetailLog(
+        ELogEventType.SessionEnding, "SessionEnding",
+        "【シャットダウン等】",
+        true);
+
+    if ( ! this.m_isEnable ) { return; }
+
+    SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
+    SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
+
+    this.m_isEnable = false;
+}
+
 
 //----------------------------------------------------------------
 /**
@@ -90,7 +105,7 @@ CloseLogger()
 public  void
 SaveLogs()
 {
-    if ( this.m_isSaved || ! this.m_isEnable ) { return; }
+    if ( this.m_isSaved || ! this.m_isStart ) { return; }
 
     this.m_srvStorage.SaveLogs(this.m_logItems);
     this.m_isSaved  = true;
@@ -103,17 +118,19 @@ SaveLogs()
 public  void
 StartLogger()
 {
-    if ( this.m_isEnable ) { return; }
+    this.m_isStart  = true;
+    this.m_isSaved  = false;
 
     WriteDetailLog(
         ELogEventType.ProgramStart, "ProgramStart",
         "【プログラム起動】現在のディスプレイ構成",
         true);
 
+    if ( this.m_isEnable ) { return; }
+
     SystemEvents.PowerModeChanged       += OnPowerModeChanged;
     SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
 
-    this.m_isSaved  = false;
     this.m_isEnable = true;
 }
 
@@ -152,7 +169,7 @@ WriteDetailLog(
         var allScreens = System.Windows.Forms.Screen.AllScreens;
         sb.AppendLine($"認識されているモニター数: {allScreens.Length}");
 
-        for (int i = 0; i < allScreens.Length; i++)
+        for ( int i = 0; i < allScreens.Length; ++i )
         {
             var scr = allScreens[i];
             sW  = scr.Bounds.Width;
@@ -171,16 +188,17 @@ WriteDetailLog(
         }
 
         this.m_logItems.Add(new LogEntry {
-            MonitorName   = monitorName,
-            EventDateTime = curTime,
-            EventKind     = eventKind,
-            EventTitle    = eventTitle,
-            ScreenHeight  = sH,
-            ScreenWidth   = sW
+            MonitorName     = monitorName,
+            EventDateTime   = curTime,
+            EventKind       = eventKind,
+            EventTitle      = eventTitle,
+            ScreenHeight    = sH,
+            ScreenWidth     = sW
         });
+        this.m_isSaved  = false;
 
         if ( flagSave ) {
-            this.m_srvStorage.SaveLogs(this.m_logItems);
+            SaveLogs();
         }
 
         // RegistryからDPIの目安を取得 (C# 8.0の switch 式を活用)
@@ -280,6 +298,7 @@ private   readonly  MonitorService      m_srvMonitor;
 
 private             LogEntriesList      m_logItems;
 
+private             System.Boolean      m_isStart;
 private             System.Boolean      m_isSaved;
 private             System.Boolean      m_isEnable;
 
