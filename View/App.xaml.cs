@@ -32,7 +32,7 @@ public  partial  class  App : Application
 protected  override  void
 OnExit(ExitEventArgs e)
 {
-    this.m_vmMain?.SaveLogs();
+    this.m_vmMain?.CloseLogger();
     base.OnExit(e);
 }
 
@@ -61,6 +61,7 @@ OnStartup(StartupEventArgs e)
 
     //  メインウィンドウを表示する。    //
     this.m_vmMain   = new MainViewModel(storage);
+    this.m_vmMain.StartLogger();
     wndSrv.showMainWindow(this.m_vmMain);
 }
 

@@ -91,7 +91,7 @@ OnSessionEnding(SessionEndingCancelEventArgs e)
 {
     WriteDetailLog(
         ELogEventType.SessionEnding, "SessionEnding",
-        "【シャットダウン等了】",
+        "【シャットダウン等】",
         true);
 
     SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
