@@ -15,6 +15,7 @@
 using   Microsoft.Win32;
 using   System;
 using   System.Collections.ObjectModel;
+using   System.Windows;
 
 using   MonitorLogger.Models;
 using   MonitorLogger.Services;
@@ -84,6 +85,21 @@ CloseLogger()
 
     this.m_isEnable = false;
 }
+
+public  void
+OnSessionEnding(SessionEndingCancelEventArgs e)
+{
+    WriteDetailLog(
+        ELogEventType.SessionEnding, "SessionEnding",
+        "【シャットダウン等了】",
+        true);
+
+    SystemEvents.PowerModeChanged       -= OnPowerModeChanged;
+    SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
+
+    this.m_isEnable = false;
+}
+
 
 //----------------------------------------------------------------
 /**

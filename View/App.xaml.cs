@@ -43,7 +43,7 @@ OnExit(ExitEventArgs e)
 protected  override  void
 OnSessionEnding(SessionEndingCancelEventArgs e)
 {
-    this.m_vmMain?.SaveLogs();
+    this.m_vmMain?.OnSessionEnding(e);
     base.OnSessionEnding(e);
 }
 
