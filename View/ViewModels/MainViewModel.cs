@@ -51,10 +51,12 @@ MainViewModel(
     this.m_srvStorage = srvLogStorage;
 
     this.m_logItems = this.m_srvStorage.LoadLogs();
+/*
     this.m_logItems.CollectionChanged += (s, e) =>
     {
 
     };
+*/
 
     this.m_isSaved  = false;
     this.m_isEnable = false;
