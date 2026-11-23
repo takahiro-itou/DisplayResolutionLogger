@@ -71,7 +71,7 @@ MainViewModel(
 **
 **  ディスプレイと電源の監視を終了する。
 **/
-public  void
+public  virtual  void
 CloseLogger()
 {
     WriteDetailLog(
@@ -91,7 +91,7 @@ CloseLogger()
 /**
 **
 **/
-public  void
+public  virtual  void
 OnSessionEnding(SessionEndingCancelEventArgs e)
 {
     WriteDetailLog(
@@ -112,7 +112,7 @@ OnSessionEnding(SessionEndingCancelEventArgs e)
 /**
 **
 **/
-public  void
+public  virtual  void
 SaveLogs()
 {
     if ( this.m_isSaved || ! this.m_isStart ) { return; }
@@ -125,7 +125,7 @@ SaveLogs()
 /**
 **
 **/
-public  void
+public  virtual  void
 StartLogger()
 {
     this.m_isStart  = true;
@@ -149,7 +149,7 @@ StartLogger()
 /**
 **
 **/
-public  void
+public  virtual  void
 WriteDetailLog(
         ELogEventType   eventKind,
         System.String   eventTitle,
