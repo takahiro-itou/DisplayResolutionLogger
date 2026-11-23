@@ -88,8 +88,9 @@ CloseLogger()
 }
 
 //----------------------------------------------------------------
-/**
+/**   セッション終了時のイベントハンドラ。
 **
+**    シャットダウンまたはログオフによって発生。
 **/
 public  virtual  void
 OnSessionEnding(SessionEndingCancelEventArgs e)
@@ -236,7 +237,7 @@ WriteDetailLog(
 //
 
 //----------------------------------------------------------------
-/**
+/**   ログのリストを取得する。
 **
 **/
 public  LogEntriesList  LogItems
@@ -251,7 +252,7 @@ public  LogEntriesList  LogItems
 //
 
 //----------------------------------------------------------------
-/**
+/**   ディスプレイ設定が変更された時のハンドラ。
 **
 **/
 private  async  void
@@ -267,7 +268,7 @@ OnDisplaySettingsChanged(object? sender, EventArgs e)
 
 
 //----------------------------------------------------------------
-/**
+/**   電源の状態が変化した時のハンドラ。
 **
 **/
 private  void
