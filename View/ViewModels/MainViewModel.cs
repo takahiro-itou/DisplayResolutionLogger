@@ -41,8 +41,10 @@ public  class  MainViewModel
 //
 
 //----------------------------------------------------------------
-/**
+/**   インスタンスを初期化する
+**  （コンストラクタ）。
 **
+**  @param [in] srvLogStorage   ストレージサービス。
 **/
 public
 MainViewModel(
@@ -60,10 +62,14 @@ MainViewModel(
 
 
 //========================================================================
+//
+//    Public Member Functions.
+//
 
 //----------------------------------------------------------------
-/**
+/**   ログをクローズする。
 **
+**  ディスプレイと電源の監視を終了する。
 **/
 public  void
 CloseLogger()
@@ -81,6 +87,10 @@ CloseLogger()
     this.m_isEnable = false;
 }
 
+//----------------------------------------------------------------
+/**
+**
+**/
 public  void
 OnSessionEnding(SessionEndingCancelEventArgs e)
 {
