@@ -81,7 +81,7 @@ public  System.String
 EventTitle { get; set; }
 
 //----------------------------------------------------------------
-/**
+/**   モニター製品名。
 **
 **/
 public  System.String
