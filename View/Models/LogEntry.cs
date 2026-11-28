@@ -83,7 +83,7 @@ public  ELogEventType
 EventKind { get; set; }
 
 //----------------------------------------------------------------
-/**
+/**   イベントの種類を示すテキスト。
 **
 **/
 public  System.String
