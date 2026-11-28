@@ -17,6 +17,15 @@ using   System;
 
 namespace  MonitorLogger.Models  {
 
+
+//========================================================================
+//
+//    ELogEventType  enum
+//
+/**
+**    イベント種別を示す列挙型。
+**/
+
 public  enum  ELogEventType
 {
     ProgramStart,
@@ -74,7 +83,7 @@ public  ELogEventType
 EventKind { get; set; }
 
 //----------------------------------------------------------------
-/**
+/**   イベントの種類を示すテキスト。
 **
 **/
 public  System.String
